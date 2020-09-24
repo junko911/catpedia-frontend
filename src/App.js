@@ -2,6 +2,10 @@ import React from 'react'
 import './App.css';
 import Login from './Components/Login'
 import Signup from './Components/Signup'
+import { BrowserRouter, Route } from 'react-router-dom'
+import './App.css'
+import Home from "./Components/Home"
+import NavBar from "./Components/Navbar"
 
 class App extends React.Component {
 
@@ -31,6 +35,14 @@ signupHandler = (userObj) =>{
         <Signup signupHandler = {this.signupHandler}/>
         <Login />
       </>
+    return (
+      <BrowserRouter>
+        <div>
+          <NavBar />
+          <Route exact path="/" component={Home} />
+          {/* <Route path='/movies' render={routerProps => <MoviesPage {...routerProps} movies={this.state.movies}/>} /> */}
+        </div>
+      </BrowserRouter>
     )
   }
 }
