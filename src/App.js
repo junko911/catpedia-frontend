@@ -1,31 +1,37 @@
 import React from 'react'
 import './App.css';
+import Login from './Components/Login'
+import Signup from './Components/Signup'
 
 class App extends React.Component {
 
-componentDidMount(){
+  state = {
+    user: {}
+  }
 
+componentDidMount(){}
 
-  fetch('http://localhost:3000/api/v1/users', {
-    method: 'POST',
+signupHandler = (userObj) =>{
+  fetch("http://localhost:3000/api/v1/users", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      Accepts: 'application/json'
+      "content-type": "application/json",
+      accepts: "application/json"
     },
-    body: JSON.stringify({
-      user: {
-        username: "maru",
-        password: "whatscooking",
-        avatar: "https://upload.wikimedia.org/wikipedia/commons/4/49/Syvia_of_Sylvia%27s_reaturant_N.Y.C_%28cropped%29.jpg"
-      }
-    })
+    body: JSON.stringify({user: userObj})
   })
-  .then(r => r.json())
+  .then(resp => resp.json())
   .then(console.log)
 }
 
+
   render() {
-    return <h1>App</h1>
+    return(
+      <>
+        <Signup signupHandler = {this.signupHandler}/>
+        <Login />
+      </>
+    )
   }
 }
 
