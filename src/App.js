@@ -1,6 +1,7 @@
 import React from 'react'
 import './App.css';
 import { BrowserRouter, Route } from 'react-router-dom'
+import Home from "./Components/Home"
 import NavBar from "./Components/Navbar"
 import Login from './Components/Login'
 import Signup from './Components/Signup'
@@ -66,10 +67,11 @@ class App extends React.Component {
   render() {
     let auth_link
     if (!this.state.user || Object.keys(this.state.user).length === 0) {
-      auth_link = <><NavLink href="/signup">Sign up</NavLink><NavLink href="/login">Log in</NavLink></>
+      // auth_link = <><NavLink href="/signup">Sign up</NavLink><NavLink href="/login">Log in</NavLink></>
+      auth_link = <><Signup signupHandler={this.signupHandler}/><Login loginHandler={this.loginHandler}/></>
     } else {
       auth_link = <NavLink onClick={this.logoutHandler} href="/logout">Log out</NavLink>
-    }
+    } 
 
     return (
       <BrowserRouter>
@@ -81,6 +83,7 @@ class App extends React.Component {
             </div>
           </div>
           <NavBar />
+          <Route path="/" component={Home} />
           <Route path="/signup" render={() => <Signup signupHandler={this.signupHandler} />} />
           <Route path="/login" render={() => <Login loginHandler={this.loginHandler}/>} />
           <Route path="/cats" component={CatContainer} />
