@@ -1,7 +1,7 @@
 import React from 'react'
 
-const BreedCard = () => {
-  return <div>Breed Card</div>
+const BreedCard = props => {
+return <div>{props.breed.name}</div>
 }
 
 export default BreedCard

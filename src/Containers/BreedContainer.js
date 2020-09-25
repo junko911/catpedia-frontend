@@ -6,7 +6,7 @@ class BreedContainer extends React.Component {
 
   state = {
     breeds: [],
-    selectedBreed: ""
+    selectedBreed: {}
   }
 
   componentDidMount() {
@@ -24,17 +24,22 @@ class BreedContainer extends React.Component {
   }
 
   genOptions = () => {
-    return this.state.breeds.map(breed => <option>{breed.name}</option>)
+    return this.state.breeds.map(breed => <option key={breed.id}>{breed.name}</option>)
+  }
+
+  selectHandler = e => {
+    const breedObj = this.state.breeds.find(breed => breed.name === e.target.value)
+    this.setState({ selectedBreed: breedObj })
   }
 
   render() {
     return (
       <>
         <div>Breed Container</div>
-        <Input type="select" name="select" id="select-breed">
+        <Input type="select" name="select" id="select-breed" onChange={this.selectHandler}>
           {this.genOptions()}
         </Input>
-        <BreedCard breed={this.state.selectedBreed}/>
+        <BreedCard breed={this.state.selectedBreed} />
       </>
     )
   }
