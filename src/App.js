@@ -39,7 +39,7 @@ class App extends React.Component {
       <BrowserRouter>
         <div className="container">
           <div className="header">
-            <h1>Catpedia</h1>
+            <h1>Catpedia<i className='fas'>&#xf1b0;</i></h1>
             <div class="auth">
               <NavLink href="/signup">Sign up</NavLink><NavLink href="/login">Log in</NavLink>
             </div>
