@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap'
+import { Form, Label, Input } from 'reactstrap'
 import BreedCard from '../Components/BreedCard'
 
 class BreedContainer extends React.Component {
@@ -38,6 +38,7 @@ class BreedContainer extends React.Component {
       <Form className="breed">
         <Label for="select-breed">Select Breed</Label>
         <Input type="select" name="select" id="select-breed" onChange={this.selectHandler}>
+          <option></option>
           {this.genOptions()}
         </Input>
         </Form>

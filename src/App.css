@@ -98,10 +98,15 @@ a.nav-link:hover {
 
 .breed {
   width: 200px;
-  margin: auto;
+  margin: 20px auto;
 }
 
 #select-breed {
   width: auto;
   margin: auto;
+}
+
+.breed-card {
+  margin-top: 30px;
+  text-align: center;
 }
