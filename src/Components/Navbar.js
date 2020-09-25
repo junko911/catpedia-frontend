@@ -12,10 +12,13 @@ const NavBar = () => {
     <div className="nav-bar">
         <Nav horizontal="center">
           <NavItem>
-            <NavLink href="/signup">Sign up</NavLink>
+            <NavLink href="/cats">Images</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="/login">Log in</NavLink>
+            <NavLink href="/breeds">Breeds</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href="/favorites">Favorites</NavLink>
           </NavItem>
         </Nav>
     </div>
