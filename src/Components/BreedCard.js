@@ -9,7 +9,20 @@ const BreedCard = props => {
   return (
     <div className="breed-card">
       <h2>{props.breed.name}</h2>
+      <i>Origin: {props.breed.origin}</i>
       {getCatsImages()}
+      <h4>📝Description</h4>
+      <p>{props.breed.description}</p>
+      <div className="details">
+        <span>🧒🏻 Child friendly: {props.breed.child_friendly}</span>
+        <span>🐶 Dog friendly: {props.breed.dog_friendly}</span>
+        <span>⚡️ Energy level: {props.breed.energy_level}</span>
+        <span>✏️ Intelligence: {props.breed.intelligence}</span>
+        <span>🐑 Shedding level: {props.breed.shedding_level}</span>
+        <span>🗣 Social needs: {props.breed.social_needs}</span>
+        <span>🦸🏻 Stranger friendly: {props.breed.stranger_friendly}</span>
+        <span>🚫 hypoallergenic: {props.breed.hypoallergenic}</span>
+      </div>
     </div>
   )
 }

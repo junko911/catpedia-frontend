@@ -108,5 +108,14 @@ a.nav-link:hover {
 
 .breed-card {
   margin-top: 30px;
+  padding: 20px;
+}
+
+.breed-card h2 {
   text-align: center;
+}
+
+.breed-card i {
+  text-align: center;
+  display: block;
 }
