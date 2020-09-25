@@ -58,7 +58,6 @@ class App extends React.Component {
   }
 
   logoutHandler = () => {
-    debugger
     localStorage.removeItem("token")
     this.setState({user: null})
   }
@@ -66,7 +65,7 @@ class App extends React.Component {
 
   render() {
     let auth_link
-    if (Object.keys(this.state.user).length === 0) {
+    if (!this.state.user || Object.keys(this.state.user).length === 0) {
       auth_link = <><NavLink href="/signup">Sign up</NavLink><NavLink href="/login">Log in</NavLink></>
     } else {
       auth_link = <NavLink onClick={this.logoutHandler} href="/logout">Log out</NavLink>
@@ -76,7 +75,7 @@ class App extends React.Component {
       <BrowserRouter>
         <div className="container">
           <div className="header">
-            <h1>Catpedia<i className='fas'>&#xf1b0;</i></h1>
+            <h1><i className='fas'>&#xf1b0;</i>Catpedia</h1>
             <div className="auth">
               {auth_link}
             </div>
