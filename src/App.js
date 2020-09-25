@@ -4,8 +4,15 @@ import Login from './Components/Login'
 import Signup from './Components/Signup'
 import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css'
-import Home from "./Components/Home"
 import NavBar from "./Components/Navbar"
+import Login from './Components/Login'
+import Signup from './Components/Signup'
+import {
+  Nav,
+  NavItem,
+  NavLink,
+  Button
+} from 'reactstrap'
 
 class App extends React.Component {
 
@@ -13,20 +20,20 @@ class App extends React.Component {
     user: {}
   }
 
-componentDidMount(){}
+  componentDidMount() { }
 
-signupHandler = (userObj) =>{
-  fetch("http://localhost:3000/api/v1/users", {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-      accepts: "application/json"
-    },
-    body: JSON.stringify({user: userObj})
-  })
-  .then(resp => resp.json())
-  .then(console.log)
-}
+  signupHandler = (userObj) => {
+    fetch("http://localhost:3000/api/v1/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json"
+      },
+      body: JSON.stringify({ user: userObj })
+    })
+      .then(resp => resp.json())
+      .then(console.log)
+  }
 
 
   render() {
@@ -37,10 +44,16 @@ signupHandler = (userObj) =>{
       </>
     return (
       <BrowserRouter>
-        <div>
+        <div className="container">
+          <div className="header">
+            <h1>Catpedia</h1>
+            <div class="auth">
+              <NavLink href="/signup">Sign up</NavLink><NavLink href="/login">Log in</NavLink>
+            </div>
+          </div>
           <NavBar />
-          <Route exact path="/" component={Home} />
-          {/* <Route path='/movies' render={routerProps => <MoviesPage {...routerProps} movies={this.state.movies}/>} /> */}
+          <Route path="/signup" render={() => <Signup signupHandler={this.signupHandler} />} />
+          <Route path="/login" component={Login} />
         </div>
       </BrowserRouter>
     )
