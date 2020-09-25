@@ -32,13 +32,20 @@ class App extends React.Component {
 
 
   render() {
+    let auth_link
+    if (Object.keys(this.state.user).length === 0) {
+      auth_link = <><NavLink href="/signup">Sign up</NavLink><NavLink href="/login">Log in</NavLink></>
+    } else {
+      auth_link = <NavLink href="/logout">Log out</NavLink>
+    }
+
     return (
       <BrowserRouter>
         <div className="container">
           <div className="header">
             <h1>Catpedia<i className='fas'>&#xf1b0;</i></h1>
             <div class="auth">
-              <NavLink href="/signup">Sign up</NavLink><NavLink href="/login">Log in</NavLink>
+              {auth_link}
             </div>
           </div>
           <NavBar />
