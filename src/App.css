@@ -1,3 +1,8 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .container {
   text-align: center;
   width: 80%;
@@ -5,6 +10,10 @@
 
 .header {
   margin: 50px auto;
+}
+
+.gallery {
+  border: 1px solid gray;
 }
 
 div.auth {
@@ -34,9 +43,6 @@ div.nav-bar .nav-link {
 a.nav-link:hover {
   color: lightslategrey;
 }
-
-
-
 
 /* cat page stuff */
 #photos {
@@ -90,7 +96,7 @@ a.nav-link:hover {
   }
 }
 
-body {
-  margin: 0;
-  padding: 0;
+#select-breed {
+  width: auto;
+  margin: auto;
 }

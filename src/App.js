@@ -23,10 +23,10 @@ class App extends React.Component {
     if (token) {
       fetch("http://localhost:3000/api/v1/profile", {
         method: "GET",
-        headers: { Authorization: `Bearer ${token}`}
+        headers: { Authorization: `Bearer ${token}` }
       })
-      .then(resp => resp.json())
-      .then(data => this.setState({user: data.user}))
+        .then(resp => resp.json())
+        .then(data => this.setState({ user: data.user }))
     }
   }
 
@@ -40,40 +40,39 @@ class App extends React.Component {
       body: JSON.stringify({ user: userObj })
     })
       .then(resp => resp.json())
-      .then(data => this.setState({user: data.user}))
+      .then(data => this.setState({ user: data.user }))
   }
 
   loginHandler = (userInfo) => {
+    
     fetch("http://localhost:3000/api/v1/login", {
       method: "POST",
       headers: {
         "content-type": "application/json",
         accept: "application/json"
       },
-      body: JSON.stringify({user: userInfo})
-      }
+      body: JSON.stringify({ user: userInfo })
+    }
     )
-    .then(r => r.json())
-    .then(data => {
-      localStorage.setItem("token", data.jwt)
-      this.setState({user: data.user})
-    })
+      .then(r => r.json())
+      .then(data => {
+        localStorage.setItem("token", data.jwt)
+        this.setState({ user: data.user })
+      })
   }
 
   logoutHandler = () => {
     localStorage.removeItem("token")
-    this.setState({user: null})
+    this.setState({ user: null })
   }
 
   render() {
     let auth_link
     if (!this.state.user || Object.keys(this.state.user).length === 0) {
-      // auth_link = <><NavLink href="/signup">Sign up</NavLink><NavLink href="/login">Log in</NavLink></>
-      auth_link = <><Signup signupHandler={this.signupHandler}/><Login loginHandler={this.loginHandler}/></>
+      auth_link = <><Signup signupHandler={this.signupHandler} /><Login loginHandler={this.loginHandler} /></>
     } else {
-      auth_link = <Logout logoutHandler={this.logoutHandler}/>
-      // auth_link = <NavLink onClick={this.logoutHandler} href="/logout">Log out</NavLink>
-    } 
+      auth_link = <Logout logoutHandler={this.logoutHandler} />
+    }
 
     return (
       <BrowserRouter>
@@ -84,13 +83,15 @@ class App extends React.Component {
               {auth_link}
             </div>
           </div>
-          <NavBar />
-          <Route path="/" component={Home} />
-          <Route path="/signup" render={() => <Signup signupHandler={this.signupHandler} />} />
-          <Route path="/login" render={() => <Login loginHandler={this.loginHandler}/>} />
-          <Route path="/cats" component={CatContainer} />
-          <Route path="/breeds" component={BreedContainer} />
-          <Route path="/favorites" component={Favorite} />
+          <div className="gallery">
+            <NavBar />
+            <Route path="/" exact component={Home} />
+            <Route path="/signup" render={() => <Signup signupHandler={this.signupHandler} />} />
+            <Route path="/login" render={() => <Login loginHandler={this.loginHandler} />} />
+            <Route path="/cats" component={CatContainer} />
+            <Route path="/breeds" component={BreedContainer} />
+            <Route path="/favorites" component={Favorite} />
+          </div>
         </div>
       </BrowserRouter>
     )
