@@ -1,38 +1,17 @@
 import React from 'react'
 
-class BreedCard extends React.Component {
+const BreedCard = props => {
 
-  state = {
-    cats: []
+  const getCatsImages = () => {
+    return props.cats.map(cat => <img key={cat.id} width="100" alt={cat.id} src={cat.url} />)
   }
 
-  getCats = () => {
-    let token = localStorage.getItem("token")
-    fetch(`http://localhost:3000/cats?breed_id=${this.props.breed.id}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "content-type": "application/json",
-        accept: "application/json"
-      }
-    })
-      .then(r => r.json())
-      .then(cats => this.setState({ cats: cats }))
-  }
-
-  getCatsImages = () => {
-    this.getCats()
-    return this.state.cats.map(cat => <img alt={cat.id} src={cat.url}/>)
-  }
-
-  render() {
-    return (
-      <div className="breed-card">
-        <h2>{this.props.breed.name}</h2>
-        {this.getCatsImages()}
-      </div>
-    )
-  }
+  return (
+    <div className="breed-card">
+      <h2>{props.breed.name}</h2>
+      {getCatsImages()}
+    </div>
+  )
 }
 
 export default BreedCard

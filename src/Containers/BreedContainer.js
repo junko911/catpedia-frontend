@@ -6,7 +6,22 @@ class BreedContainer extends React.Component {
 
   state = {
     breeds: [],
-    selectedBreed: {}
+    selectedBreed: null,
+    cats: []
+  }
+
+  getCats() {
+    let token = localStorage.getItem("token")
+    fetch(`http://localhost:3000/cats?breed_id=${this.state.selectedBreed.id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "content-type": "application/json",
+        accept: "application/json"
+      }
+    })
+      .then(r => r.json())
+      .then(cats => this.setState({ cats }))
   }
 
   componentDidMount() {
@@ -20,7 +35,7 @@ class BreedContainer extends React.Component {
       }
     })
       .then(r => r.json())
-      .then(breeds => this.setState({ breeds: breeds }))
+      .then(breeds => this.setState({ breeds }))
   }
 
   genOptions = () => {
@@ -29,20 +44,20 @@ class BreedContainer extends React.Component {
 
   selectHandler = e => {
     const breedObj = this.state.breeds.find(breed => breed.name === e.target.value)
-    this.setState({ selectedBreed: breedObj })
+    this.setState({ selectedBreed: breedObj }, this.getCats)
   }
 
   render() {
     return (
       <>
-      <Form className="breed">
-        <Label for="select-breed">Select Breed</Label>
-        <Input type="select" name="select" id="select-breed" onChange={this.selectHandler}>
-          <option></option>
-          {this.genOptions()}
-        </Input>
+        <Form className="breed">
+          <Label for="select-breed">Select Breed</Label>
+          <Input type="select" name="select" id="select-breed" onChange={this.selectHandler}>
+            <option></option>
+            {this.genOptions()}
+          </Input>
         </Form>
-        <BreedCard breed={this.state.selectedBreed} />
+        {this.state.selectedBreed && <BreedCard breed={this.state.selectedBreed} cats={this.state.cats} />}
       </>
     )
   }
