@@ -5,10 +5,10 @@ import Home from "./Components/Home"
 import NavBar from "./Components/Navbar"
 import Login from './Components/Login'
 import Signup from './Components/Signup'
+import Logout from './Components/Logout'
 import CatContainer from './Containers/CatContainer'
 import BreedContainer from './Containers/BreedContainer'
 import Favorite from './Containers/Favorite'
-import { NavLink } from 'reactstrap'
 
 class App extends React.Component {
 
@@ -63,14 +63,14 @@ class App extends React.Component {
     this.setState({user: null})
   }
 
-
   render() {
     let auth_link
     if (!this.state.user || Object.keys(this.state.user).length === 0) {
       // auth_link = <><NavLink href="/signup">Sign up</NavLink><NavLink href="/login">Log in</NavLink></>
       auth_link = <><Signup signupHandler={this.signupHandler}/><Login loginHandler={this.loginHandler}/></>
     } else {
-      auth_link = <NavLink onClick={this.logoutHandler} href="/logout">Log out</NavLink>
+      auth_link = <Logout logoutHandler={this.logoutHandler}/>
+      // auth_link = <NavLink onClick={this.logoutHandler} href="/logout">Log out</NavLink>
     } 
 
     return (
