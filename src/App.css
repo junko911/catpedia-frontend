@@ -4,11 +4,11 @@ body {
 }
 
 .container {
-  text-align: center;
   width: 80%;
 }
 
 .header {
+  text-align: center;
   margin: 50px auto;
 }
 
@@ -94,6 +94,11 @@ a.nav-link:hover {
   -webkit-column-count: 1;
   column-count:         1;
   }
+}
+
+.breed {
+  width: 200px;
+  margin: auto;
 }
 
 #select-breed {

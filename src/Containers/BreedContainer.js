@@ -35,10 +35,12 @@ class BreedContainer extends React.Component {
   render() {
     return (
       <>
-        <div>Breed Container</div>
+      <Form className="breed">
+        <Label for="select-breed">Select Breed</Label>
         <Input type="select" name="select" id="select-breed" onChange={this.selectHandler}>
           {this.genOptions()}
         </Input>
+        </Form>
         <BreedCard breed={this.state.selectedBreed} />
       </>
     )
