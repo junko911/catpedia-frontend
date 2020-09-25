@@ -35,11 +35,6 @@ class App extends React.Component {
 
 
   render() {
-    return(
-      <>
-        <Signup signupHandler = {this.signupHandler}/>
-        <Login />
-      </>
     return (
       <BrowserRouter>
         <div className="container">
