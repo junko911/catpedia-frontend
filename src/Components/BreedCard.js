@@ -43,7 +43,7 @@ class BreedCard extends React.Component {
           onExited={() => this.setState({ setAnimating: false })}
           key={cat.id}
         >
-          <img src={cat.url} alt={cat.id} width="100%" height="100%" />
+          <img src={cat.url} alt={cat.id}/>
         </CarouselItem>
       );
     });
