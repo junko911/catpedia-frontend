@@ -4,6 +4,7 @@ import {
   CarouselItem,
   CarouselControl,
 } from 'reactstrap';
+import BreedProperty from './BreedProperty';
 
 class BreedCard extends React.Component {
 
@@ -17,13 +18,13 @@ class BreedCard extends React.Component {
     return this.props.cats.map(cat => <img key={cat.id} width="100" alt={cat.id} src={cat.url} />)
   }
 
-  next= () => {
+  next = () => {
     if (this.state.animating) return
     const nextIndex = this.state.activeIndex === this.props.cats.length - 1 ? 0 : this.state.activeIndex + 1
     this.setState({ activeIndex: nextIndex })
   }
 
-  previous= () => {
+  previous = () => {
     if (this.state.animating) return
     const nextIndex = this.state.activeIndex === 0 ? this.props.cats.length - 1 : this.state.activeIndex - 1
     this.setState({ activeIndex: nextIndex })
@@ -43,13 +44,15 @@ class BreedCard extends React.Component {
           onExited={() => this.setState({ setAnimating: false })}
           key={cat.id}
         >
-          {/* <div style={{
-              backgroundImage: `url(${cat.url})`,
-            }}></div> */}
-          <img src={cat.url} alt={cat.id}/>
+          <img src={cat.url} alt={cat.id} />
         </CarouselItem>
       );
     });
+  }
+
+  genProperties = () => {
+    const properties = [{child_friendly: "🧒🏻"}, {dog_friendly: "🐶"}, {energy_level: "⚡️"}, {intelligence: "✏️"}, {shedding_level: "🐑"}, {social_needs: "👥"}, {stranger_friendly: "🦸🏻"}]
+    return properties.map(property => <BreedProperty level={this.props.breed[Object.keys(property)[0]]} propertyName={Object.keys(property)[0]} emoji={Object.values(property)[0]}/>)
   }
 
   render() {
@@ -66,17 +69,9 @@ class BreedCard extends React.Component {
           <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
           <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
         </Carousel>
-        <h4>📝Description</h4>
-        <p>{this.props.breed.description}</p>
-        <div className="details">
-          <span>🧒🏻 Child friendly: {this.props.breed.child_friendly}</span>
-          <span>🐶 Dog friendly: {this.props.breed.dog_friendly}</span>
-          <span>⚡️ Energy level: {this.props.breed.energy_level}</span>
-          <span>✏️ Intelligence: {this.props.breed.intelligence}</span>
-          <span>🐑 Shedding level: {this.props.breed.shedding_level}</span>
-          <span>🗣 Social needs: {this.props.breed.social_needs}</span>
-          <span>🦸🏻 Stranger friendly: {this.props.breed.stranger_friendly}</span>
-          <span>🚫 hypoallergenic: {this.props.breed.hypoallergenic}</span>
+        <div className="breed-details">
+          <p>{this.props.breed.description}</p>
+          {this.genProperties()}
         </div>
       </div>
     )
