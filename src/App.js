@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css';
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Link } from 'react-router-dom'
 import Home from "./Components/Home"
 import NavBar from "./Components/Navbar"
 import Login from './Components/Login'
@@ -77,7 +77,7 @@ class App extends React.Component {
       <BrowserRouter>
         <div className="container">
           <div className="header">
-            <h1><i className='fas'>&#xf1b0;</i>Catpedia</h1>
+            <Link to="/"><h1><i className='fas'>&#xf1b0;</i>Catpedia</h1></Link>
             <div className="auth">
               {auth_link}
             </div>

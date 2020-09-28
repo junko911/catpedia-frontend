@@ -12,6 +12,15 @@ body {
   margin: 50px auto;
 }
 
+.header a {
+  color: black;
+}
+
+.header a:hover {
+  color: #5c5c5c;
+  text-decoration: none;
+}
+
 .gallery {
   border: 1px solid gray;
 }
