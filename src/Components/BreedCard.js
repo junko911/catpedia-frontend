@@ -43,6 +43,9 @@ class BreedCard extends React.Component {
           onExited={() => this.setState({ setAnimating: false })}
           key={cat.id}
         >
+          {/* <div style={{
+              backgroundImage: `url(${cat.url})`,
+            }}></div> */}
           <img src={cat.url} alt={cat.id}/>
         </CarouselItem>
       );
