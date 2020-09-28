@@ -31,7 +31,7 @@ class CatContainer extends React.Component {
    return this.state.catArray.map((cat, index) => <CatCard showModalImage={this.showModalImage} url={cat.url} breeds={cat.breeds} id={cat.id} slide={index}/>)
   }
 
-  componentDidMount(){
+  APICall = () => {
     let token = localStorage.getItem("token")
     fetch("http://localhost:3000/cats", {
       method: "GET",
@@ -44,11 +44,24 @@ class CatContainer extends React.Component {
     .then(this.catSetState)
   }
 
+  componentDidMount(){
+    this.APICall()
+  }
+
+  clickHandler = () => {
+    this.componentDidMount()
+  }
+
 
   render() {
+
+    let moreCats = 'More!' + '\xa0\xa0'
     return (
       <>
       <div id="photos">{this.renderCats()}</div>
+      <Button onClick={this.clickHandler} color="primary" size="lg">{moreCats}<i class="fas fa-cat"></i>
+
+</Button>{' '}
        <Modal
             className="modal-xl"
             isOpen={this.state.isModalOpen}
@@ -63,9 +76,6 @@ class CatContainer extends React.Component {
            </Row>
          </ModalBody>
             </Modal>
-
-
-      
       </>
       )
     }
