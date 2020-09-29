@@ -139,3 +139,11 @@ a.nav-link:hover {
 div.breed-details div.col {
   padding-top: 4px;
 }
+
+.attributes {
+  margin: 20px auto;
+}
+
+.attributes span {
+  margin-right: 10px;
+}
