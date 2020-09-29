@@ -9,7 +9,6 @@ import Logout from './Components/Logout'
 import CatContainer from './Containers/CatContainer'
 import BreedContainer from './Containers/BreedContainer'
 import Favorite from './Containers/Favorite'
-import { Button, Modal, ModalHeader, ModalBody, Carousel } from 'reactstrap'
 
 
 class App extends React.Component {
