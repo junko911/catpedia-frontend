@@ -2,7 +2,7 @@ import React from 'react'
 import {
   Carousel,
   CarouselItem,
-  CarouselControl,
+  CarouselIndicators
 } from 'reactstrap';
 import BreedProperty from './BreedProperty';
 
@@ -31,7 +31,6 @@ class BreedCard extends React.Component {
   }
 
   goToIndex = (newIndex) => {
-    debugger
     if (this.state.animating) return
     this.setState({ activeIndex: newIndex })
   }
@@ -46,13 +45,24 @@ class BreedCard extends React.Component {
         >
           <img src={cat.url} alt={cat.id} />
         </CarouselItem>
-      );
-    });
+      )
+    })
+  }
+
+  genAttributes = () => {
+    const attributes = ["rare", "hypoallergenic", "hairless", "short_legs"]
+    return attributes.map(attr => {
+      if (this.props.breed[attr] === 1) {
+        return <span><span role="img" aria-label="check">✅</span>&nbsp;{attr[0].toUpperCase() + attr.split('_').join(' ').slice(1)}</span>
+      } else {
+        return null
+      }
+    })
   }
 
   genProperties = () => {
-    const properties = [{child_friendly: "🧒🏻"}, {dog_friendly: "🐶"}, {energy_level: "⚡️"}, {intelligence: "✏️"}, {shedding_level: "🐑"}, {social_needs: "👥"}, {stranger_friendly: "🦸🏻"}]
-    return properties.map(property => <BreedProperty level={this.props.breed[Object.keys(property)[0]]} propertyName={Object.keys(property)[0]} emoji={Object.values(property)[0]}/>)
+    const properties = [{ child_friendly: "🧒🏻" }, { dog_friendly: "🐶" }, { energy_level: "⚡️" }, { intelligence: "✏️" }, { shedding_level: "🐑" }, { social_needs: "👥" }, { stranger_friendly: "🦸🏻" }]
+    return properties.map(property => <BreedProperty key={properties.indexOf(property)} level={this.props.breed[Object.keys(property)[0]]} propertyName={Object.keys(property)[0]} emoji={Object.values(property)[0]} />)
   }
 
   render() {
@@ -66,12 +76,12 @@ class BreedCard extends React.Component {
           previous={this.previous}
         >
           {this.slides()}
-          <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
-          <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
+          <CarouselIndicators items={this.props.cats} activeIndex={this.state.activeIndex} onClickHandler={this.goToIndex} />
         </Carousel>
         <div className="breed-details">
           <p>{this.props.breed.description}</p>
-          {this.genProperties()}
+          <div className="attributes">{this.genAttributes()}</div>
+          <div>{this.genProperties()}</div>
         </div>
       </div>
     )
