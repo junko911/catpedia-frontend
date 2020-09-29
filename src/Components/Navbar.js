@@ -18,6 +18,9 @@ const NavBar = () => {
           <NavItem>
             <NavLink href="/favorites">Favorites</NavLink>
           </NavItem>
+          <NavItem>
+            <NavLink href="/upload_image">Upload</NavLink>
+          </NavItem>
         </Nav>
     </div>
   )
