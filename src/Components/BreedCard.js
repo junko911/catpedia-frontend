@@ -17,18 +17,6 @@ class BreedCard extends React.Component {
   getCatsImages() {
     return this.props.cats.map(cat => <img key={cat.id} width="100" alt={cat.id} src={cat.url} />)
   }
-  
-  next = () => {
-    if (this.state.animating) return
-    const nextIndex = this.state.activeIndex === this.props.cats.length - 1 ? 0 : this.state.activeIndex + 1
-    this.setState({ activeIndex: nextIndex })
-  }
-
-  previous = () => {
-    if (this.state.animating) return
-    const nextIndex = this.state.activeIndex === 0 ? this.props.cats.length - 1 : this.state.activeIndex - 1
-    this.setState({ activeIndex: nextIndex })
-  }
 
   goToIndex = (newIndex) => {
     if (this.state.animating) return
@@ -61,8 +49,6 @@ class BreedCard extends React.Component {
         <i>Origin: {this.props.breed.origin}</i>
         <Carousel
           activeIndex={this.state.activeIndex}
-          next={this.next}
-          previous={this.previous}
         >
           {this.slides()}
           <CarouselIndicators items={this.props.cats} activeIndex={this.state.activeIndex} onClickHandler={this.goToIndex} />
