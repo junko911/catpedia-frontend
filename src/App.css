@@ -174,4 +174,5 @@ div.breed-details div.col {
   color: #888888;
   outline: none;
   transition: border .24s ease-in-out;
+  margin-bottom: 40px;
 }
