@@ -1,49 +1,31 @@
 import React from 'react'
 import Dropzone from 'react-dropzone'
+import { Alert } from 'reactstrap'
 
 class ImageUpload extends React.Component {
 
   state = {
-    files: []
+    files: [],
+    uploaded: false
   }
 
   dropHandler = files => {
     this.setState({ files }, () => {
 
       const file = files[0]
-      const xhr = new XMLHttpRequest();
-      xhr.withCredentials = true;
-      const fd = new FormData();
+      const xhr = new XMLHttpRequest()
+      const fd = new FormData()
 
-      xhr.addEventListener("readystatechange", function () {
+      xhr.addEventListener("readystatechange", () => {
         if (this.readyState === this.DONE) {
-          console.log(this.responseText);
+          this.setState({uploaded: true})
         }
-      });
-      
+      })
 
       // Initiate a multipart/form-data upload
-      xhr.open("POST", "https://api.thecatapi.com/v1/images/upload");
-      // xhr.setRequestHeader("content-type", "application/javascript");
-      xhr.setRequestHeader("x-api-key", "047eb9c2-34db-4886-af65-6895473b2a38");
-
-      fd.append('file', file);
-      // fd.append('sub_id', "1");
-      
-      xhr.send(fd);
-
-      // const reader = new FileReader()
-
-      // reader.onabort = () => console.log('file reading was aborted')
-      // reader.onerror = () => console.log('file reading has failed')
-      // reader.onload = () => {
-      // // Do whatever you want with the file contents
-      //   const binaryStr = reader.result
-      //   debugger
-      //   console.log(binaryStr)
-      //   console.log(URL.createObjectURL(this.state.files[0]))
-      // }
-      // reader.readAsArrayBuffer(files[0])
+      xhr.open("POST", "http://localhost:3000/cats");
+      fd.append('file', file);      
+      xhr.send(fd)
     })
   }
 
@@ -59,10 +41,6 @@ class ImageUpload extends React.Component {
     borderRadius: 2,
     border: '1px solid #eaeaea',
     margin: 'auto',
-    // marginBottom: 8,
-    // marginRight: 8,
-    // width: 100,
-    // height: 100,
     padding: 4,
     boxSizing: 'border-box'
   }
@@ -94,6 +72,14 @@ class ImageUpload extends React.Component {
     )
   }
 
+  uploadedAlert = () => {
+    return(
+      <Alert color="success">
+        The image is uploaded successfully! Check your favorites!
+      </Alert>
+    )
+  }
+
   render() {
     return (
       <div className="form-container">
@@ -103,11 +89,12 @@ class ImageUpload extends React.Component {
             <section>
               <div {...getRootProps(({ className: 'dropzone' }))}>
                 <input {...getInputProps()} />
-                <p>Drag 'n' drop some files here, or click to select files</p>
+                <p>Drag 'n' drop a file here, or click to select a file</p>
               </div>
               {this.state.files.length === 0 ? null
                 :
                 <>
+                {this.state.uploaded ? this.uploadedAlert() : null}
                 <h4>Preview</h4>
                 <aside style={this.thumbsContainer}>
                   {this.thumbs()}
