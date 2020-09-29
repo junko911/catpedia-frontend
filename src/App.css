@@ -122,9 +122,13 @@ a.nav-link:hover {
   margin: 30px auto;
 }
 
+.carousel-item {
+  text-align: center;
+}
+
 .carousel-item img {
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: 500px;
 }
 
 .breed-details {
@@ -134,4 +138,12 @@ a.nav-link:hover {
 
 div.breed-details div.col {
   padding-top: 4px;
+}
+
+.attributes {
+  margin: 20px auto;
+}
+
+.attributes span {
+  margin-right: 10px;
 }
