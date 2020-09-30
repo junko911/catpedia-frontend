@@ -60,9 +60,9 @@ class App extends React.Component {
       .then(r => r.json())
       .then(data => {
         localStorage.setItem("token", data.jwt)
-        this.setState({ user: data.user })
-      })
-  }
+      this.setState({ user: data.user })
+    })
+}
 
   logoutHandler = () => {
     localStorage.removeItem("token")
