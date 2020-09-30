@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Row, Col, Modal, ModalHeader, ModalFooter, ModalBody } from 'reactstrap'
+import { Card, Row, Col, Modal, ModalHeader, ModalFooter, ModalBody } from 'reactstrap'
 import CatCard from '../Components/CatCard'
 import ImageCarousel from '../Components/ImageCarousel'
 
@@ -34,6 +34,14 @@ class Profile extends React.Component{
        return this.state.catArray.map((cat, index) => <CatCard showModalImage={this.showModalImage} url={cat.url} id={cat.id} slide={index}/>)
       }
 
+    deleteHandler = (id) => {
+
+        fetch(`http://localhost:3000/likes/${id}`, {
+                method: "DELETE"
+            })
+            this.setState({catArray: [], isModalOpen: false}, this.componentDidMount)
+        }
+
     componentDidMount(){
             let token = localStorage.getItem("token")
             fetch("http://localhost:3000/user_favs", {
@@ -54,10 +62,9 @@ render() {
     // console.log(this.state.catArray)
     return (
       <>
+      <Card>Profile Card Here</Card>
       <div id="photos">{this.renderCats()}</div>
-      <Button onClick={this.clickHandler} color="primary" size="lg">{moreCats}<i className="fas fa-cat"></i>
-
-</Button>{' '}
+    
        <Modal
             className="modal-xl"
             isOpen={this.state.isModalOpen}
@@ -67,7 +74,7 @@ render() {
          <ModalBody>
            <Row>
              <Col md="12">
-               <ImageCarousel images={this.state.catArray} delete_fav = {this.props.delete_fav} currentIndex={this.state.currentIndex} button_color= {"danger"} />
+               <ImageCarousel images={this.state.catArray} deleteHandler = {this.deleteHandler} currentIndex={this.state.currentIndex} button_color= {"danger"} />
              </Col>
            </Row>
          </ModalBody>

@@ -49,11 +49,7 @@ class ImageCarousel extends React.Component {
   };
 
   deleteHandler = () => {
-
-  fetch(`http://localhost:3000/likes/${this.props.images[this.state.activeIndex].id}`, {
-        method: "DELETE"
-    })
-    this.setState({state: this.state})
+    this.props.deleteHandler(this.props.images[this.state.activeIndex].id)
   }
 
   
