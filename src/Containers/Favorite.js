@@ -8,7 +8,7 @@ const Favorite = props => {
       return (
         <li key={user.id}>
           {user.username}
-          <Button color="primary" size="sm">Follow</Button>
+          <Button color="primary" size="sm">{props.current_user.followers && props.current_user.followers.filter(e => e.id === user.id).length > 0 ? <>Unfollow</> : <>Follow</>}</Button>
         </li>
       )
     })
@@ -30,8 +30,7 @@ const Favorite = props => {
     }
     return null
   }
-  // debugger
-  // console.log(typeOf props.current_user.followeds)
+
   const getFollowers = () => {
     if (props.current_user.followeds) {
       if (props.current_user.followeds === 0) {
@@ -51,7 +50,7 @@ const Favorite = props => {
 
   return (
     <>
-      { Object.keys(props.current_user).length !== 0 ?
+      {props.current_user && Object.keys(props.current_user).length !== 0 ?
         <>
           <div>Users</div>
           <ul>{getAllUsers()}</ul>
@@ -61,8 +60,8 @@ const Favorite = props => {
           <ul>{getFollowers()}</ul>
         </>
         :
-          <h3>Please signup or login!</h3>
-        }
+        <h3>Please signup or login!</h3>
+      }
     </>
   )
 }
