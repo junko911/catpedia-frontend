@@ -60,9 +60,9 @@ class App extends React.Component {
       .then(r => r.json())
       .then(data => {
         localStorage.setItem("token", data.jwt)
-      this.setState({ user: data.user })
-    })
-}
+        this.setState({ user: data.user })
+      })
+  }
 
   logoutHandler = () => {
     localStorage.removeItem("token")
@@ -126,7 +126,7 @@ class App extends React.Component {
             <Route path="/login" render={() => <Login loginHandler={this.loginHandler} />} />
             <Route path="/cats" component={CatContainer} />
             <Route path="/breeds" component={BreedContainer} />
-            <Route path="/profile" render={() => <Profile users={this.state.users} current_user={this.state.user} followHandler={this.followHandler} unFollowHandler={this.unFollowHandler}/>} />
+            <Route path="/profile" render={() => <Profile users={this.state.users} current_user={this.state.user} followHandler={this.followHandler} unFollowHandler={this.unFollowHandler} />} />
             <Route path="/upload_image" component={ImageUpload} />
           </div>
         </div>
