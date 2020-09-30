@@ -92,6 +92,17 @@ class App extends React.Component {
       })
   }
 
+  unFollowHandler = user => {
+    fetch(`http://localhost:3000/api/v1/users/${user.id}/unfollow`)
+      .then(res => res.json())
+      .then(() => {
+        const newFollowers = this.state.user.followers.filter(e => e.id !== user.id)
+        const newUser = this.state.user
+        newUser.followers = newFollowers
+        this.setState({ user: newUser })
+      })
+  }
+
   render() {
     let auth_link
     if (!this.state.user || Object.keys(this.state.user).length === 0) {
@@ -115,8 +126,7 @@ class App extends React.Component {
             <Route path="/login" render={() => <Login loginHandler={this.loginHandler} />} />
             <Route path="/cats" component={CatContainer} />
             <Route path="/breeds" component={BreedContainer} />
-            <Route path="/profile" render={() => <Profile users={this.state.users} current_user={this.state.user} followHandler={this.followHandler} />}/>
-            {/* <Route path="/favorites" render={() => <Favorite users={this.state.users} current_user={this.state.user} followHandler={this.followHandler} />} /> */}
+            <Route path="/profile" render={() => <Profile users={this.state.users} current_user={this.state.user} followHandler={this.followHandler} unFollowHandler={this.unFollowHandler}/>} />
             <Route path="/upload_image" component={ImageUpload} />
           </div>
         </div>
