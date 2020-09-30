@@ -1,7 +1,6 @@
 import React from 'react'
 import './App.css';
 import { BrowserRouter, Route, Link } from 'react-router-dom'
-import Home from "./Components/Home"
 import NavBar from "./Components/Navbar"
 import Login from './Components/Login'
 import Signup from './Components/Signup'
@@ -84,7 +83,7 @@ render() {
     <BrowserRouter>
       <div className="container">
         <div className="header">
-          <Link to="/"><h1><i className='fas'>&#xf1b0;</i>Catpedia</h1></Link>
+          <Link to="/cats"><h1><i className='fas'>&#xf1b0;</i>Catpedia</h1></Link>
           <div className="auth">
             {auth_link}
           </div>
@@ -95,7 +94,8 @@ render() {
           <Route path="/login" render={() => <Login loginHandler={this.loginHandler} />} />
           <Route path="/cats" component={CatContainer} />
           <Route path="/breeds" component={BreedContainer} />
-          <Route path="/profile" render={() => <Profile users={this.state.users}/>} />
+          <Route path="/profile" render={() => <Profile users={this.state.users} current_user={this.state.user}/>} />
+          {/* <Route path="/favorites" render={() => <Favorite users={this.state.users} current_user={this.state.user}/>} /> */}
           <Route path="/upload_image" component={ImageUpload} />
         </div>
       </div>
