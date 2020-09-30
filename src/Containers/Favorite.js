@@ -8,7 +8,9 @@ const Favorite = props => {
       return (
         <li key={user.id}>
           {user.username}
-          <Button color="primary" size="sm">{props.current_user.followers && props.current_user.followers.filter(e => e.id === user.id).length > 0 ? <>Unfollow</> : <>Follow</>}</Button>
+          <Button color="primary" size="sm" onClick={() => props.followHandler(user)}>
+            {props.current_user.followers && props.current_user.followers.filter(e => e.id === user.id).length > 0 ? <>Unfollow</> : <>Follow</>}
+          </Button>
         </li>
       )
     })

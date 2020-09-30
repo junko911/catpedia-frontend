@@ -8,20 +8,20 @@ import {
 const NavBar = () => {
   return (
     <div className="nav-bar">
-        <Nav horizontal="center">
-          <NavItem>
-            <NavLink href="/cats">Images</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="/breeds">Breeds</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="/profile">Profile</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="/upload_image">Upload</NavLink>
-          </NavItem>
-        </Nav>
+      <Nav horizontal="center">
+        <NavItem>
+          <NavLink href="/cats">Images</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink href="/breeds">Breeds</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink href="/profile">Profile</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink href="/upload_image">Upload</NavLink>
+        </NavItem>
+      </Nav>
     </div>
   )
 }
