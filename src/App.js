@@ -96,7 +96,7 @@ render() {
           <Route path="/login" render={() => <Login loginHandler={this.loginHandler} />} />
           <Route path="/cats" component={CatContainer} />
           <Route path="/breeds" component={BreedContainer} />
-          <Route path="/favorites" render={() => <Favorite users={this.state.users}/>} />
+          <Route path="/favorites" render={() => <Favorite users={this.state.users} current_user={this.state.user}/>} />
           <Route path="/upload_image" component={ImageUpload} />
         </div>
       </div>
