@@ -179,6 +179,7 @@ div.breed-details div.col {
   outline: none;
   transition: border .24s ease-in-out;
   margin-bottom: 40px
+}
 .attributes {
   margin: 20px auto;
 }

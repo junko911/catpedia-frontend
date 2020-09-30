@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Button,
   Carousel,
   CarouselItem,
   CarouselControl,
@@ -45,9 +46,34 @@ class ImageCarousel extends React.Component {
     });
   };
 
+  favHandler = () => {
+    let token = localStorage.getItem("token")
+
+    let data = {
+      cat: {
+      cat_id: this.props.images[this.state.activeIndex].id,
+      image: this.props.images[this.state.activeIndex].url
+      }
+    }
+
+    let options = {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}`,
+                 "Content-Type": "application/json",
+                 "accept": "applicatoin/json" 
+                },
+      body: JSON.stringify(data)
+    }
+
+    fetch("http://localhost:3000/cat_fav", options)
+      // console.log(this.props.images[this.state.activeIndex].id, this.props.images[this.state.activeIndex])
+  }
+
   render() {
+    
     const { images } = this.props;
     const { activeIndex } = this.state;
+    // console.log(images, activeIndex)
     const slides = images.map((image, index) => {
       return (
         <CarouselItem
@@ -63,6 +89,7 @@ class ImageCarousel extends React.Component {
     });
 
     return (
+      <>
       <Carousel
         activeIndex={activeIndex}
         next={this.next}
@@ -85,6 +112,8 @@ class ImageCarousel extends React.Component {
           onClickHandler={this.next}
         />
       </Carousel>
+      <Button color="success" onClick={this.favHandler}> Favorite</Button>
+      </>
     );
   }
 }
