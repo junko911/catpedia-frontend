@@ -9,19 +9,18 @@ const NavBar = () => {
   return (
     <div className="nav-bar">
       <Nav horizontal="center">
-        {/* <NavItem> */}
+        <NavItem>
           <NavLink href="/cats">Images</NavLink>
-        {/* </NavItem> */}
-        {/* <NavItem> */}
+        </NavItem>
+        <NavItem>
           <NavLink href="/breeds">Breeds</NavLink>
-        {/* </NavItem> */}
-        {/* <NavItem> */}
+        </NavItem>
+        <NavItem>
           <NavLink href="/favorites">Favorites</NavLink>
-        {/* </NavItem> */}
-        {/* <NavItem> */}
+        </NavItem>
+        <NavItem>
           <NavLink href="/upload_image">Upload</NavLink>
-        {/* </NavItem> */}
-        <span className="slider"></span>
+        </NavItem>
       </Nav>
     </div>
   )
