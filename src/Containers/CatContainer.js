@@ -1,9 +1,9 @@
 import React from 'react'
-import { Button, Row, Col, Modal, ModalHeader, ModalBody } from 'reactstrap'
+import { Button, Row, Col, Modal, ModalHeader, ModalFooter, ModalBody } from 'reactstrap'
 import CatCard from '../Components/CatCard'
 import ImageCarousel from '../Components/ImageCarousel'
 
-class CatContainer extends React.Component {
+export default class CatContainer extends React.Component {
 
   state = {
    catArray: [],
@@ -44,6 +44,10 @@ class CatContainer extends React.Component {
     .then(this.catSetState)
   }
 
+  favHandler = () => {
+   return console.log(this.state.currentIndex)
+  }
+
   componentDidMount(){
     this.APICall()
   }
@@ -56,10 +60,11 @@ class CatContainer extends React.Component {
   render() {
 
     let moreCats = 'More!' + '\xa0\xa0'
+    // console.log(this.state.catArray)
     return (
       <>
       <div id="photos">{this.renderCats()}</div>
-      <Button onClick={this.clickHandler} color="primary" size="lg">{moreCats}<i class="fas fa-cat"></i>
+      <Button onClick={this.clickHandler} color="primary" size="lg">{moreCats}<i className="fas fa-cat"></i>
 
 </Button>{' '}
        <Modal
@@ -71,14 +76,12 @@ class CatContainer extends React.Component {
          <ModalBody>
            <Row>
              <Col md="12">
-               <ImageCarousel images={this.state.catArray} currentIndex={this.state.currentIndex}/>
+               <ImageCarousel images={this.state.catArray} button_color={"success"} currentIndex={this.state.currentIndex}/>
              </Col>
            </Row>
          </ModalBody>
-            </Modal>
+        </Modal>
       </>
       )
     }
-}
-
-export default CatContainer
+  }

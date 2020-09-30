@@ -16,7 +16,7 @@ const NavBar = () => {
             <NavLink href="/breeds">Breeds</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="/favorites">Favorites</NavLink>
+            <NavLink href="/profile">Profile</NavLink>
           </NavItem>
           <NavItem>
             <NavLink href="/upload_image">Upload</NavLink>
