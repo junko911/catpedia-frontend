@@ -14,7 +14,7 @@ class App extends React.Component {
 
   state = {
     user: {},
-    users: [],
+    users: []
   }
 
   componentDidMount() {
