@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Row, Col, Modal, ModalHeader, ModalFooter, ModalBody } from 'reactstrap'
+import { Button, Card, Row, Col, Modal, ModalHeader, ModalFooter, ModalBody } from 'reactstrap'
 import CatCard from '../Components/CatCard'
 import ImageCarousel from '../Components/ImageCarousel'
 
@@ -56,10 +56,20 @@ class Profile extends React.Component{
             .then(this.catSetState)
     }
 
+    getUsers = () => {
+      return this.props.users.map(user => {
+        return (
+          <li key={user.id}>
+            {user.username}
+            <Button color="primary" size="sm">Follow</Button>
+          </li>
+        )
+      })
+    }
+
 render() {
 
     let moreCats = 'More!' + '\xa0\xa0'
-    // console.log(this.state.catArray)
     return (
       <>
       <Card>Profile Card Here</Card>
