@@ -1,5 +1,7 @@
 import React from "react";
+import { useState} from 'react'
 import {
+  Button,
   Carousel,
   CarouselItem,
   CarouselControl,
@@ -13,10 +15,11 @@ class ImageCarousel extends React.Component {
       activeIndex: 0,
       animating: false
     }
+
   componentDidMount() {
     this.setState({ activeIndex: this.props.currentIndex });
   }
-
+  
   next = () => {
     const { animating, activeIndex } = this.state;
     const { images } = this.props;
@@ -24,7 +27,7 @@ class ImageCarousel extends React.Component {
     const nextIndex = activeIndex === images.length - 1 ? 0 : activeIndex + 1;
     this.setState({ activeIndex: nextIndex });
   };
-
+  
   previous = () => {
     const { animating, activeIndex } = this.state;
     const { images } = this.props;
@@ -38,16 +41,52 @@ class ImageCarousel extends React.Component {
     if (animating) return;
     this.setState({ activeIndex: newIndex });
   };
-
+  
   setAnimating = value => {
     this.setState({
       animating: value
     });
   };
 
+  deleteHandler = () => {
+
+  fetch(`http://localhost:3000/likes/${this.props.images[this.state.activeIndex].id}`, {
+        method: "DELETE"
+    })
+    this.setState({state: this.state})
+  }
+
+  
+  favHandler = () => {
+    let token = localStorage.getItem("token")
+
+    let data = {
+      cat: {
+      api_id: this.props.images[this.state.activeIndex].id,
+      url: this.props.images[this.state.activeIndex].url
+      }
+    }
+
+    
+    let options = {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+      "accept": "applicatoin/json" 
+    },
+    body: JSON.stringify(data)
+  }
+
+    fetch("http://localhost:3000/cat_fav", options)
+    // console.log(this.props.images[this.state.activeIndex].id, this.props.images[this.state.activeIndex])
+  }
+
+
   render() {
+    
     const { images } = this.props;
     const { activeIndex } = this.state;
+    // console.log(images, activeIndex)
     const slides = images.map((image, index) => {
       return (
         <CarouselItem
@@ -63,6 +102,7 @@ class ImageCarousel extends React.Component {
     });
 
     return (
+      <>
       <Carousel
         activeIndex={activeIndex}
         next={this.next}
@@ -85,6 +125,9 @@ class ImageCarousel extends React.Component {
           onClickHandler={this.next}
         />
       </Carousel>
+      
+      <Button color={this.props.button_color} onClick={this.props.button_color === "success" ? this.favHandler : this.deleteHandler}>{this.props.button_color === "success" ? "Favorite" : "Delete" }</Button>
+      </>
     );
   }
 }
