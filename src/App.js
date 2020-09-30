@@ -8,7 +8,7 @@ import Signup from './Components/Signup'
 import Logout from './Components/Logout'
 import CatContainer from './Containers/CatContainer'
 import BreedContainer from './Containers/BreedContainer'
-import Favorite from './Containers/Favorite'
+import Profile from './Containers/Profile'
 import ImageUpload from './Containers/ImageUpload'
 
 class App extends React.Component {
@@ -89,8 +89,9 @@ class App extends React.Component {
             <Route path="/login" render={() => <Login loginHandler={this.loginHandler} />} />
             <Route path="/cats" component={CatContainer} />
             <Route path="/breeds" component={BreedContainer} />
-            <Route path="/favorites" component={Favorite} />
+            <Route path="/profile" component={Profile} />
             <Route path="/upload_image" component={ImageUpload} />
+            
           </div>
         </div>
       </BrowserRouter>
