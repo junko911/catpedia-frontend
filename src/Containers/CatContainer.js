@@ -59,9 +59,7 @@ export default class CatContainer extends React.Component {
 
 
   render() {
-
     let moreCats = 'More!' + '\xa0\xa0'
-    // console.log(this.state.catArray)
     return (
       <>
         <div id="photos" style={{margin: "auto", width: "90%"}}>{this.renderCats()}</div>
