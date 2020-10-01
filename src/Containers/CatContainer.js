@@ -45,10 +45,6 @@ export default class CatContainer extends React.Component {
       .then(this.catSetState)
   }
 
-  favHandler = () => {
-    return console.log(this.state.currentIndex)
-  }
-
   componentDidMount() {
     this.APICall()
   }
@@ -86,7 +82,7 @@ export default class CatContainer extends React.Component {
           <ModalBody>
             <Row>
               <Col md="12">
-                <ImageCarousel images={this.state.catArray} button_color={"success"} currentIndex={this.state.currentIndex} current_user={this.props.current_user} favHandler={this.props.favHandler}/>
+                <ImageCarousel images={this.state.catArray} currentIndex={this.state.currentIndex} current_user={this.props.current_user} favHandler={this.props.favHandler} favCats={this.props.favCats}/>
               </Col>
             </Row>
           </ModalBody>

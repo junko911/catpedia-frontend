@@ -8,7 +8,6 @@ import UserModal from '../Components/UserModal'
 class Profile extends React.Component {
 
   state = {
-    favCats: [],
     isModalOpen: false,
     imagesToShow: 30,
     currentIndex: 0,
@@ -42,8 +41,8 @@ class Profile extends React.Component {
   }
 
   renderCats = () => {
-    console.log("hello", this.state.favCats)
-    return this.state.favCats.map((cat, index) => <CatCard showModalImage={this.showModalImage} url={cat.url} id={cat.id} slide={index} />)
+    console.log("hello", this.props.favCats)
+    return this.props.favCats.map((cat, index) => <CatCard showModalImage={this.showModalImage} url={cat.url} id={cat.id} slide={index} />)
   }
 
   deleteHandler = (id) => {
@@ -52,25 +51,14 @@ class Profile extends React.Component {
     })
       .then(res => res.json())
       .then(() => {
-        const newFavCats = this.state.favCats.filter(e => e.id !== id)
+        const newFavCats = this.props.favCats.filter(e => e.id !== id)
         this.setState({ favCats: newFavCats }, () => this.toggleModal())
       })
   }
 
   componentDidMount() {
     let token = localStorage.getItem("token")
-    fetch("http://localhost:3000/api/v1/user_favs", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "content-type": "application/json",
-        accept: "application/json"
-      }
-    })
-      .then(r => r.json())
-      .then(data => {
-        this.setState({ favCats: data })
-      })
+
   }
 
   getFollowings = () => {
@@ -157,7 +145,7 @@ class Profile extends React.Component {
               <div style={{ margin: "50px auto", width: "90%" }}>
                 <div className="row" >
                   <div className="col-12">
-                    <FavoriteGallery favCats={this.state.favCats} deleteHandler={this.deleteHandler} isModalOpen={this.state.isModalOpen} current_user={this.props.current_user} toggleModal={this.toggleModal} />
+                    <FavoriteGallery favCats={this.props.favCats} deleteHandler={this.deleteHandler} isModalOpen={this.state.isModalOpen} current_user={this.props.current_user} toggleModal={this.toggleModal} />
                   </div>
                 </div>
               </div>

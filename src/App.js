@@ -14,7 +14,8 @@ class App extends React.Component {
 
   state = {
     user: {},
-    users: []
+    users: [],
+    favCats: []
   }
 
   componentDidMount() {
@@ -26,13 +27,25 @@ class App extends React.Component {
       })
         .then(resp => resp.json())
         .then(data => this.setState({ user: data.user }))
+      fetch("http://localhost:3000/api/v1/users", {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` }
+      })
+        .then(res => res.json())
+        .then(users => this.setState({ users: users }))
+      fetch("http://localhost:3000/api/v1/user_favs", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "content-type": "application/json",
+          accept: "application/json"
+        }
+      })
+        .then(r => r.json())
+        .then(data => {
+          this.setState({ favCats: data })
+        })
     }
-    fetch("http://localhost:3000/api/v1/users", {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(res => res.json())
-      .then(users => this.setState({ users: users }))
   }
 
   signupHandler = (userObj) => {
@@ -125,9 +138,14 @@ class App extends React.Component {
       body: JSON.stringify(cat)
     }
     fetch("http://localhost:3000/api/v1/cat_fav", options)
+      .then(res => res.json())
+      .then(cat => {
+        const newFavCats = [...this.state.favCats, cat]
+        this.setState({ favCats: newFavCats })
+      })
   }
 
-  
+
   render() {
     let auth_link
     if (!this.state.user || Object.keys(this.state.user).length === 0) {
@@ -150,11 +168,11 @@ class App extends React.Component {
             <Switch>
               <Route path="/signup" render={() => <Signup signupHandler={this.signupHandler} />} />
               <Route path="/login" render={() => <Login loginHandler={this.loginHandler} />} />
-              <Route path="/cats" render={() => <CatContainer current_user={this.state.user} favHandler={this.favHandler}/>} />
+              <Route path="/cats" render={() => <CatContainer current_user={this.state.user} favHandler={this.favHandler} favCats={this.state.favCats} />} />
               <Route path="/breeds" component={BreedContainer} />
-              <Route path="/profile" render={() => <Profile users={this.state.users} current_user={this.state.user} followHandler={this.followHandler} unFollowHandler={this.unFollowHandler} />} />
+              <Route path="/profile" render={() => <Profile users={this.state.users} current_user={this.state.user} followHandler={this.followHandler} unFollowHandler={this.unFollowHandler} favCats={this.state.favCats} />} />
               <Route path="/upload_image" component={ImageUpload} />
-              <Route path="/" component={CatContainer} />
+              <Route path="/" render={() => <CatContainer current_user={this.state.user} favHandler={this.favHandler} favCats={this.state.favCats} />} />
             </Switch>
           </div>
         </div>
