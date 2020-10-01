@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Row, Col, Modal, ModalHeader, ModalFooter, ModalBody } from 'reactstrap'
+import { Button, Row, Col, Modal, ModalHeader, ModalBody } from 'reactstrap'
 import CatCard from '../Components/CatCard'
 import ImageCarousel from '../Components/ImageCarousel'
 
@@ -29,11 +29,10 @@ export default class CatContainer extends React.Component {
   }
 
   renderCats = () => {
-    return this.state.catArray.map((cat, index) => <CatCard showModalImage={this.showModalImage} url={cat.url} breeds={cat.breeds} id={cat.id} slide={index} />)
+    return this.state.catArray.map((cat, index) => <CatCard key={cat.id} showModalImage={this.showModalImage} url={cat.url} breeds={cat.breeds} id={cat.id} slide={index} />)
   }
 
   APICall = () => {
-    let token = localStorage.getItem("token")
     fetch("http://localhost:3000/api/v1/cats", {
       method: "GET",
       headers: {

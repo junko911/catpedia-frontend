@@ -129,7 +129,7 @@ class Profile extends React.Component {
               <Col md="4">
                 <CardBody>
                   <CardTitle>{this.props.current_user.name}</CardTitle>
-                  <CardSubtitle>{this.props.current_user.username}</CardSubtitle>
+                  <CardSubtitle>@{this.props.current_user.username}</CardSubtitle>
                   <CardText>
                     {this.props.current_user.bio}
                   </CardText>

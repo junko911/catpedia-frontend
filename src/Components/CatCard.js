@@ -16,7 +16,7 @@ let clickHandler = () => {
 
   return( 
     <>
-      <img  className="cat_img" src={props.url} onClick={clickHandler}/>
+      <img  className="cat_img" src={props.url} onClick={clickHandler} alt=""/>
       {/* <h1>Breed: {breedCheck()}</h1> */}
     </>
   )

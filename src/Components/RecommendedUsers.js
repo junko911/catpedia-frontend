@@ -40,7 +40,7 @@ const RecommendedUsers = props => {
 
   return (
     <>
-      <div><i class="fas fa-users"></i>   Recommended Users</div>
+      <div><i className="fas fa-users"></i>   Recommended Users</div>
       <div style={{ height: "200px", overflow: "scroll" }}>
         <ul className="list-group">
           {getUserCards()}
