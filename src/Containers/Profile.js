@@ -56,25 +56,6 @@ class Profile extends React.Component {
       .then(this.catSetState)
   }
 
-  getAllUsers = () => {
-    return this.props.users.map(user => {
-      return (
-        <li key={user.id}>
-          {user.username}
-          {this.props.current_user.followers && this.props.current_user.followers.filter(e => e.id === user.id).length > 0 ?
-            <Button color="primary" size="sm" onClick={() => this.props.unFollowHandler(user)}>
-              Unfollow
-            </Button>
-            :
-            <Button color="primary" size="sm" onClick={() => this.props.followHandler(user)}>
-              Follow
-          </Button>
-          }
-        </li>
-      )
-    })
-  }
-
   getFollowings = () => {
     if (this.props.current_user.followers) {
       if (this.props.current_user.followers.length === 0) {
@@ -136,8 +117,6 @@ class Profile extends React.Component {
         </Modal>
         {this.props.current_user && Object.keys(this.props.current_user).length !== 0 ?
           <>
-            <div>Users</div>
-            <ul>{this.getAllUsers()}</ul>
             <div>Following</div>
             <ul>{this.getFollowings()}</ul>
             <div>Followers</div>
@@ -152,7 +131,7 @@ class Profile extends React.Component {
               <div style={{ border: "1px solid black", height: "600px" }}></div>
             </div>
             <div className="col-3">
-              <RecommendedUsers users={this.props.users} />
+              <RecommendedUsers users={this.props.users} current_user={this.props.current_user} followHandler={this.props.followHandler} unFollowHandler={this.props.unFollowHandler}/>
             </div>
           </div>
         </div>
