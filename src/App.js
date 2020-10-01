@@ -15,6 +15,7 @@ class App extends React.Component {
   state = {
     user: {},
     users: [],
+    cats: [],
     favCats: []
   }
 
@@ -46,6 +47,23 @@ class App extends React.Component {
           this.setState({ favCats: data })
         })
     }
+    this.renderCats()
+  }
+
+  renderCats = () => {
+    fetch("http://localhost:3000/api/v1/cats", {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        accept: "application/json"
+      }
+    })
+      .then(r => r.json())
+      .then(this.catSetState)
+  }
+
+  catSetState = (data) => {
+    data.map(catObj => this.setState({ cats: [...this.state.cats, catObj] }))
   }
 
   signupHandler = (userObj) => {
@@ -125,7 +143,12 @@ class App extends React.Component {
       })
   }
 
-  favHandler = cat => {
+  favHandler = api_id => {
+    const foundCat = this.state.cats.find(cat => cat.id === api_id)
+    const newCat = {
+      api_id: foundCat.id,
+      url: foundCat.url
+    }
     let token = localStorage.getItem("token")
     let options = {
       method: "POST",
@@ -134,7 +157,7 @@ class App extends React.Component {
         "Content-Type": "application/json",
         "accept": "applicatoin/json"
       },
-      body: JSON.stringify(cat)
+      body: JSON.stringify(newCat)
     }
     fetch("http://localhost:3000/api/v1/cat_fav", options)
       .then(res => res.json())
@@ -178,11 +201,11 @@ class App extends React.Component {
             <Switch>
               <Route path="/signup" render={() => <Signup signupHandler={this.signupHandler} />} />
               <Route path="/login" render={() => <Login loginHandler={this.loginHandler} />} />
-              <Route path="/cats" render={() => <CatContainer current_user={this.state.user} buttonHandler={this.favHandler} favCats={this.state.favCats} />} />
+              <Route path="/cats" render={() => <CatContainer current_user={this.state.user} buttonHandler={this.favHandler} cats={this.state.cats} favCats={this.state.favCats} renderCats={this.renderCats}/>} />
               <Route path="/breeds" component={BreedContainer} />
-              <Route path="/profile" render={() => <Profile users={this.state.users} current_user={this.state.user} followHandler={this.followHandler} unFollowHandler={this.unFollowHandler} favCats={this.state.favCats} buttonHandler={this.deleteHandler}/>} />
+              <Route path="/profile" render={() => <Profile users={this.state.users} current_user={this.state.user} followHandler={this.followHandler} unFollowHandler={this.unFollowHandler} favCats={this.state.favCats} buttonHandler={this.deleteHandler} />} />
               <Route path="/upload_image" component={ImageUpload} />
-              <Route path="/" render={() => <CatContainer current_user={this.state.user} buttonHandler={this.favHandler} favCats={this.state.favCats} />} />
+              <Route path="/" render={() => <CatContainer current_user={this.state.user} buttonHandler={this.favHandler} cats={this.state.cats} favCats={this.state.favCats} />} />
             </Switch>
           </div>
         </div>

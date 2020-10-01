@@ -61,10 +61,8 @@ class ImageCarousel extends React.Component {
   }
 
   buttonHandler = () => {
-    // if(this.props.favCats.filter(cat => cat.api_id === this.props.images[this.state.activeIndex].id).length === 0) {
-    //   this.favHandler()
-    // }
-    this.props.buttonHandler(this.props.images[this.state.activeIndex].api_id)
+    const id = this.props.images[this.state.activeIndex].api_id ? this.props.images[this.state.activeIndex].api_id : this.props.images[this.state.activeIndex].id
+    this.props.buttonHandler(id)
   }
 
   render() {
