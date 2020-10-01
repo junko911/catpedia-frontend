@@ -66,7 +66,12 @@ class ImageCarousel extends React.Component {
   }
 
   render() {
-    const { images } = this.props;
+    let id = 0
+    if (this.props.images[this.state.activeIndex]) {
+      id = this.props.images[this.state.activeIndex].api_id ? this.props.images[this.state.activeIndex].api_id : this.props.images[this.state.activeIndex].id
+    }
+    const fav = this.props.favCats.filter(cat => cat.api_id === id).length > 0
+    const { images } = this.props
     const { activeIndex } = this.state;
     const slides = images.map((image, index) => {
       return (
@@ -81,8 +86,6 @@ class ImageCarousel extends React.Component {
         </CarouselItem>
       );
     });
-
-    // let fav = this.props.favCats.filter(cat => cat.api_id === this.props.images[this.state.activeIndex].api_id).length > 0
 
     return (
       <>
@@ -111,18 +114,18 @@ class ImageCarousel extends React.Component {
         {this.props.current_user && Object.keys(this.props.current_user).length !== 0 ?
           <Button
             color={
-              // fav ?
-                // "danger"
-                // :
+              fav ?
+                "danger"
+                :
                 "success"
             }
             onClick={this.buttonHandler}
             style={{ display: "block", margin: "auto" }}
           >
             {
-              // fav ?
-                // "Unfavorite"
-                // :
+              fav ?
+                "Unfavorite"
+                :
                 "Favorite"
             }
           </Button>
