@@ -5,16 +5,11 @@ import ImageCarousel from '../Components/ImageCarousel'
 class FavoriteGallery extends React.Component {
 
   state = {
-    isModalOpen: false,
     currentIndex: 0
   }
 
-  toggleModal = () => {
-    this.setState({isModalOpen: !this.state.isModalOpen})
-  }
-
   showModalImage = index => {
-    this.toggleModal();
+    this.props.toggleModal();
     this.setState({
       currentIndex: index
     })
@@ -25,8 +20,10 @@ class FavoriteGallery extends React.Component {
       return (
         <div key={cat.id} className="col">
           <div style={{
-            background: `url(${cat.url}),no-repeat, center`,
-            backgroundSize: "100% auto",
+            backgroundImage: `url(${cat.url})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
             width: "170px",
             height: "170px",
             margin: "5px"
@@ -45,10 +42,10 @@ class FavoriteGallery extends React.Component {
         </div>
         <Modal
           className="modal-xl"
-          isOpen={this.state.isModalOpen}
-          toggle={this.toggleModal}
+          isOpen={this.props.isModalOpen}
+          toggle={this.props.toggleModal}
         >
-          <ModalHeader> Cat Gallery </ModalHeader>
+          <ModalHeader> Your Favorite Cats </ModalHeader>
           <ModalBody>
             <Row>
               <Col md="12">
