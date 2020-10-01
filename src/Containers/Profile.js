@@ -106,7 +106,7 @@ class Profile extends React.Component {
               <div style={{ margin: "50px auto", width: "90%" }}>
                 <div className="row" >
                   <div className="col-9">
-                    <FavoriteGallery favCats={this.state.catArray} deleteHandler={this.deleteHandler} isModalOpen={this.state.isModalOpen} toggleModal={this.toggleModal}/>
+                    <FavoriteGallery favCats={this.state.catArray} deleteHandler={this.deleteHandler} isModalOpen={this.state.isModalOpen} toggleModal={this.toggleModal} />
                   </div>
                   <div className="col-3">
                     <RecommendedUsers users={this.props.users} current_user={this.props.current_user} followHandler={this.props.followHandler} unFollowHandler={this.props.unFollowHandler} />
@@ -115,7 +115,14 @@ class Profile extends React.Component {
               </div>
             </>
             :
-            <h3>Please signup or login!</h3>
+            <div style={{
+              width: "90%",
+              margin: "50px auto",
+              textAlign: "center",
+            }}>
+              <h4 style={{ textAlign: "center" }}>Please signup or login!</h4>
+              <img src="https://http.cat/401" alt="Not authorized" />
+            </div>
         }
       </>
     )
