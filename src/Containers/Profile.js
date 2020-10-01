@@ -146,7 +146,16 @@ class Profile extends React.Component {
           :
           <h3>Please signup or login!</h3>
         }
-        <RecommendedUsers users={this.props.users}/>
+        <div style={{ margin: "50px auto", width: "90%" }}>
+          <div className="row" >
+            <div className="col-9">
+              <div style={{ border: "1px solid black", height: "600px" }}></div>
+            </div>
+            <div className="col-3">
+              <RecommendedUsers users={this.props.users} />
+            </div>
+          </div>
+        </div>
       </>
     )
   }

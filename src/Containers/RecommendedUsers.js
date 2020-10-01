@@ -6,26 +6,26 @@ const RecommendedUsers = props => {
     const avator = user.avator ? user.avator : "/images/cat-placeholder.png"
 
     return (
-      <li>
+      <li className="list-group-item d-flex justify-content-between align-items-center">
         <img
           src={avator}
           alt={user.username}
           style={
             {
               borderRadius: "50%",
-              width: "45px",
-              height: "45px",
-              margin: "10px"
+              width: "30px",
+              height: "30px",
             }
           }
         />
-        <strong>{user.username}</strong>
+        {user.username}
       </li>
     )
   }
 
   const getUserCards = () => {
     return props.users.map(user => {
+      console.log(user)
       return genUserCard(user)
     })
   }
@@ -33,7 +33,11 @@ const RecommendedUsers = props => {
   return (
     <>
       <div>Recommended Users</div>
-      <ul style={{listStyleType: "none"}}>{getUserCards()}</ul>
+      <div style={{height: "200px", overflow: "scroll"}}>
+        <ul class="list-group">
+          {getUserCards()}
+        </ul>
+      </div>
     </>
   )
 }
