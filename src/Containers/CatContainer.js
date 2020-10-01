@@ -17,6 +17,7 @@ export default class CatContainer extends React.Component {
   }
 
   showModalImage = imageId => {
+    console.log(imageId)
     this.toggleModal();
     this.setState({
       currentIndex: imageId

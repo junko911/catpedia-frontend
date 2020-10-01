@@ -115,7 +115,7 @@ class App extends React.Component {
       <BrowserRouter>
         <div className="container">
           <div className="header">
-            <Link to="/"><h1><i className='fas'>&#xf1b0;</i>Catpedia</h1></Link>
+            <Link to="/cats"><h1><i className='fas'>&#xf1b0;</i>Catpedia</h1></Link>
             <div className="auth">
               {auth_link}
             </div>

@@ -21,7 +21,7 @@ class Login extends React.Component {
     submitHandler = (event) => {
         event.preventDefault()
         this.props.loginHandler(this.state)
-        this.props.history.push('/')
+        this.props.history.push('/cats')
     }
 
     render(){

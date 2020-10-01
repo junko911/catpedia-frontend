@@ -4,6 +4,8 @@ import CatCard from '../Components/CatCard'
 import FavoriteGallery from '../Components/FavoriteGallery'
 import ImageCarousel from '../Components/ImageCarousel'
 import RecommendedUsers from '../Components/RecommendedUsers'
+import { withRouter } from 'react-router-dom'
+
 
 class Profile extends React.Component {
 
@@ -25,9 +27,9 @@ class Profile extends React.Component {
     })
   }
 
-  catSetState = (data) => {
-    data.map(catObj => this.setState({ catArray: [...this.state.catArray, catObj] }))
-  }
+  // catSetState = (data) => {
+  //   data.map(catObj => this.setState({ catArray: [...this.state.catArray, catObj] }))
+  // }
 
   renderCats = () => {
     console.log("hello", this.state.catArray)
@@ -38,7 +40,12 @@ class Profile extends React.Component {
     fetch(`http://localhost:3000/likes/${id}`, {
       method: "DELETE"
     })
-    this.setState({ catArray: [], isModalOpen: false }, this.componentDidMount)
+      .then(res => res.json())
+      .then(() => {
+        const newCatArray = this.state.catArray.filter(e => e.id !== id)
+        this.setState({ catArray: newCatArray, isModalOpen: false }, () => this.props.history.push('/profile'))
+      })
+    // this.setState({ catArray: [], isModalOpen: false }, this.componentDidMount)
   }
 
   componentDidMount() {
@@ -91,12 +98,13 @@ class Profile extends React.Component {
   }
 
   render() {
-
     let moreCats = 'More!' + '\xa0\xa0'
     return (
       <>
-        <Card>Profile Card Here</Card>
-        <div id="photos">{this.renderCats()}</div>
+        {this.props.current_user && Object.keys(this.props.current_user).length !== 0 ?
+          <>
+            <Card>Profile Card Here</Card>
+            {/* <div id="photos">{this.renderCats()}</div>
 
         <Modal
           className="modal-xl"
@@ -114,31 +122,32 @@ class Profile extends React.Component {
           <ModalFooter>
 
           </ModalFooter>
-        </Modal>
-        {this.props.current_user && Object.keys(this.props.current_user).length !== 0 ?
-          <>
-            <div>Following</div>
-            <ul>{this.getFollowings()}</ul>
-            <div>Followers</div>
-            <ul>{this.getFollowers()}</ul>
+        </Modal> */}
+
+            <>
+              <div>Following</div>
+              <ul>{this.getFollowings()}</ul>
+              <div>Followers</div>
+              <ul>{this.getFollowers()}</ul>
+            </>
+            <div style={{ margin: "50px auto", width: "90%" }}>
+              <div className="row" >
+                <div className="col-9">
+                  <FavoriteGallery favCats={this.state.catArray} deleteHandler={this.deleteHandler} />
+                </div>
+                <div className="col-3">
+                  <RecommendedUsers users={this.props.users} current_user={this.props.current_user} followHandler={this.props.followHandler} unFollowHandler={this.props.unFollowHandler} />
+                </div>
+              </div>
+            </div>
           </>
           :
           <h3>Please signup or login!</h3>
         }
-        <div style={{ margin: "50px auto", width: "90%" }}>
-          <div className="row" >
-            <div className="col-9">
-                <FavoriteGallery favCats={this.state.catArray}/>
-            </div>
-            <div className="col-3">
-              <RecommendedUsers users={this.props.users} current_user={this.props.current_user} followHandler={this.props.followHandler} unFollowHandler={this.props.unFollowHandler}/>
-            </div>
-          </div>
-        </div>
       </>
     )
   }
 
 }
 
-export default Profile
+export default withRouter(Profile)
