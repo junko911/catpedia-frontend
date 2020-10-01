@@ -131,7 +131,7 @@ class Profile extends React.Component {
                   <CardTitle>{this.props.current_user.name}</CardTitle>
                   <CardSubtitle>@{this.props.current_user.username}</CardSubtitle>
                   <CardText>
-                    {this.props.current_user.bio}
+                    Bio: {this.props.current_user.bio}
                   </CardText>
                   <Button onClick={this.renderFollowers}>Followers: {this.props.current_user.followers.length}</Button>
                   <br/>

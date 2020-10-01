@@ -96,7 +96,14 @@ class App extends React.Component {
   }
 
   unFollowHandler = user => {
-    fetch(`http://localhost:3000/api/v1/users/${user.id}/unfollow`)
+
+    const token = localStorage.getItem("token")
+    fetch(`http://localhost:3000/api/v1/users/${user.id}/unfollow`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+    })
       .then(res => res.json())
       .then(() => {
         const newFollowers = this.state.user.followers.filter(e => e.id !== user.id)

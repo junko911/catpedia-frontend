@@ -53,14 +53,12 @@ class ImageCarousel extends React.Component {
 
   favHandler = () => {
     let token = localStorage.getItem("token")
-
     let data = {
       cat: {
         api_id: this.props.images[this.state.activeIndex].id,
         url: this.props.images[this.state.activeIndex].url
       }
     }
-
 
     let options = {
       method: "POST",
@@ -78,10 +76,8 @@ class ImageCarousel extends React.Component {
 
 
   render() {
-
     const { images } = this.props;
     const { activeIndex } = this.state;
-    // console.log(images, activeIndex)
     const slides = images.map((image, index) => {
       return (
         <CarouselItem
