@@ -35,7 +35,6 @@ const RecommendedUsers = props => {
 
   const getUserCards = () => {
     return props.users.map(user => {
-      console.log(user)
       return genUserCard(user)
     })
   }

@@ -34,7 +34,6 @@ class Profile extends React.Component {
   }
 
   deleteHandler = (id) => {
-
     fetch(`http://localhost:3000/likes/${id}`, {
       method: "DELETE"
     })
