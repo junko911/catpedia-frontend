@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css';
-import { BrowserRouter, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom'
 import NavBar from "./Components/Navbar"
 import Login from './Components/Login'
 import Signup from './Components/Signup'
@@ -122,6 +122,7 @@ class App extends React.Component {
           </div>
           <div className="gallery">
             <NavBar />
+            <Redirect exact from="/" to="/cats" />
             <Route path="/signup" render={() => <Signup signupHandler={this.signupHandler} />} />
             <Route path="/login" render={() => <Login loginHandler={this.loginHandler} />} />
             <Route path="/cats" component={CatContainer} />
