@@ -3,8 +3,6 @@ import { Card } from 'reactstrap'
 import CatCard from '../Components/CatCard'
 import FavoriteGallery from '../Components/FavoriteGallery'
 import RecommendedUsers from '../Components/RecommendedUsers'
-import { withRouter } from 'react-router-dom'
-
 
 class Profile extends React.Component {
 
@@ -93,7 +91,6 @@ class Profile extends React.Component {
   }
 
   render() {
-    let moreCats = 'More!' + '\xa0\xa0'
     return (
       <>
         {
@@ -126,4 +123,4 @@ class Profile extends React.Component {
 
 }
 
-export default withRouter(Profile)
+export default Profile
