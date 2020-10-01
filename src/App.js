@@ -103,6 +103,7 @@ class App extends React.Component {
       })
   }
 
+  
   render() {
     let auth_link
     if (!this.state.user || Object.keys(this.state.user).length === 0) {

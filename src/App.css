@@ -25,6 +25,22 @@ body {
   border: 1px solid gray;
 }
 
+.pic_container{
+  overflow: hidden
+}
+
+.profile_pic {
+  transition: transform 5s, border-raidus 3s ease-in-out;
+  border-radius: 20%;
+  transform-origin: 50% 65%;
+  filter: brightness(110%);
+}
+
+.profile_pic:hover{
+  filter: brightness(100%);
+  transform: scale(3);
+}
+
 div.auth {
   color: black;
   font-size: 25px;

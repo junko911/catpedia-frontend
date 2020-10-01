@@ -6,7 +6,10 @@ class Signup extends React.Component {
 
     state = {
         username: "",
+        name: "",
         password: "",
+        avatar: "",
+        bio: "",
         modal: false
     }
 
@@ -19,8 +22,15 @@ class Signup extends React.Component {
     }
 
     submitHandler = (event) => {
+       let userObj = {
+            username: this.state.username,
+            name: this.state.name,
+            password: this.state.password,
+            avatar: this.state.avatar,
+            bio: this.state.bio
+        }
         event.preventDefault()
-        this.props.signupHandler(this.state)
+        this.props.signupHandler(userObj)
         this.props.history.push('/cats')
     }
 
@@ -34,7 +44,10 @@ class Signup extends React.Component {
                         <form onSubmit={this.submitHandler}>
                             <div className="modal-body">
                                 <input name="username" value={this.state.username} onChange={this.changeHandler} placeholder="Username..."></input>
+                                <input name="name" value={this.state.name} onChange={this.changeHandler} placeholder="Name..."></input>
                                 <input name="password" value={this.state.password} onChange={this.changeHandler} placeholder="Password..."></input>
+                                <input name="avatar" value={this.state.avatar} onChange={this.changeHandler} placeholder="Profile Picture..."></input>
+                                <input name="bio" value={this.state.bio} onChange={this.changeHandler} placeholder="A little about yourself..."></input>
                             </div>
                             <div className="modal-footer">
                                 <input type="submit" className="btn btn-success" value="Signup"/>

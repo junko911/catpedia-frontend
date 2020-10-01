@@ -1,8 +1,9 @@
 import React from 'react'
-import { Card } from 'reactstrap'
+import { Card, Col, CardImg, Row, CardBody, CardTitle, CardSubtitle, CardText, Button } from 'reactstrap'
 import CatCard from '../Components/CatCard'
 import FavoriteGallery from '../Components/FavoriteGallery'
 import RecommendedUsers from '../Components/RecommendedUsers'
+import UserModal from '../Components/UserModal'
 
 class Profile extends React.Component {
 
@@ -10,11 +11,27 @@ class Profile extends React.Component {
     catArray: [],
     isModalOpen: false,
     imagesToShow: 30,
-    currentIndex: 0
+    currentIndex: 0,
+    userModal: false,
+    modalUsers: []
   }
 
   toggleModal = () => {
     this.setState({ isModalOpen: !this.state.isModalOpen })
+  }
+
+  renderFollowers = () => { 
+    this.toggleUserModal()
+    this.setState({modalUsers: this.props.current_user.followers, userModal: !this.state.userModal})
+  }
+
+  renderFollowing = () => {
+    this.toggleUserModal()
+    this.setState({modalUsers: this.props.current_user.followeds, userModal: !this.state.userModal})
+}
+
+  toggleUserModal = () => {
+      this.setState({userModal: !this.state.userModal})
   }
 
   showModalImage = imageId => {
@@ -96,23 +113,55 @@ class Profile extends React.Component {
         {
           this.props.current_user && Object.keys(this.props.current_user).length !== 0 ?
             <>
-              <Card>Profile Card Here</Card>
-              <>
-                <div>Following</div>
-                <ul>{this.getFollowings()}</ul>
-                <div>Followers</div>
-                <ul>{this.getFollowers()}</ul>
-              </>
-              <div style={{ margin: "50px auto", width: "90%" }}>
-                <div className="row" >
-                  <div className="col-9">
-                    <FavoriteGallery favCats={this.state.catArray} deleteHandler={this.deleteHandler} isModalOpen={this.state.isModalOpen} toggleModal={this.toggleModal} />
-                  </div>
-                  <div className="col-3">
-                    <RecommendedUsers users={this.props.users} current_user={this.props.current_user} followHandler={this.props.followHandler} unFollowHandler={this.props.unFollowHandler} />
-                  </div>
-                </div>
-              </div>
+     <Row>
+        <Col>
+          <Card>
+            <Row className="no-gutters">
+              <Col className= "pic_container" md="4">
+                <CardImg
+                className = "profile_pic"
+                  top
+                  width="100%"
+                  src="https://media.wired.com/photos/598e35994ab8482c0d6946e0/master/w_2560%2Cc_limit/phonepicutres-TA.jpg"
+                  alt="Card image cap"
+                />
+              </Col>
+              <Col md="4">
+                <CardBody>
+                  <CardTitle>{this.props.current_user.name}</CardTitle>
+                  <CardSubtitle>{this.props.current_user.username}</CardSubtitle>
+                  <CardText>
+                    {this.props.current_user.bio}
+                  </CardText>
+                  <Button onClick={this.renderFollowers}>Followers: {this.props.current_user.followers.length}</Button>
+                  <br/>
+                  <br/>
+                  <Button onClick={this.renderFollowing}>Following: {this.props.current_user.followeds.length}</Button>
+
+                </CardBody>
+              </Col>
+              <Col md="4">
+              <CardBody
+              className="Recommended"
+              top
+              width="100%"
+              >
+                 <RecommendedUsers users={this.props.users} current_user={this.props.current_user} followHandler={this.props.followHandler} unFollowHandler={this.props.unFollowHandler} />
+              </CardBody>
+              
+              </Col>
+            </Row>
+          </Card>
+        </Col>
+      </Row>
+        <div style={{ margin: "50px auto", width: "90%" }}>
+        <div className="row" >
+            <div className="col-12">
+            <FavoriteGallery favCats={this.state.catArray} deleteHandler={this.deleteHandler} isModalOpen={this.state.isModalOpen} current_user={this.props.current_user} toggleModal={this.toggleModal} />
+            </div>
+        </div>
+        </div>
+        <UserModal users={this.state.modalUsers} userModal={this.state.userModal} toggleModal={this.toggleUserModal}/>
             </>
             :
             <div style={{
