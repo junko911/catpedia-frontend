@@ -26,8 +26,12 @@ class UserModal extends React.Component{
               isOpen={this.props.userModal}
               toggle={this.props.toggleModal}
             >
-                <UserCarousel users={this.props.users}/>
-                {/* <ImageCarousel/> */}
+                <ModalBody>
+                <UserCarousel unFollowHandler={this.props.unFollowHandler} users={this.props.users}/>
+                </ModalBody>
+                <ModalFooter>
+                <ImageCarousel currentIndex={0} current_user= {this.props.current_user} images ={this.props.favCats}/>
+                </ModalFooter>
             </Modal>
             </>
         )

@@ -161,7 +161,7 @@ class Profile extends React.Component {
             </div>
         </div>
         </div>
-        <UserModal users={this.state.modalUsers} userModal={this.state.userModal} toggleModal={this.toggleUserModal}/>
+        <UserModal current_user={this.props.current_user} favCats={this.state.catArray} unFollowHandler= {this.props.unFollowHandler} users={this.state.modalUsers} userModal={this.state.userModal} toggleModal={this.toggleUserModal}/>
             </>
             :
             <div style={{
