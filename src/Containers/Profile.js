@@ -45,20 +45,8 @@ class Profile extends React.Component {
     return this.props.favCats.map((cat, index) => <CatCard showModalImage={this.showModalImage} url={cat.url} id={cat.id} slide={index} />)
   }
 
-  deleteHandler = (id) => {
-    fetch(`http://localhost:3000/api/v1/likes/${id}`, {
-      method: "DELETE"
-    })
-      .then(res => res.json())
-      .then(() => {
-        const newFavCats = this.props.favCats.filter(e => e.id !== id)
-        this.setState({ favCats: newFavCats }, () => this.toggleModal())
-      })
-  }
-
   componentDidMount() {
     let token = localStorage.getItem("token")
-
   }
 
   getFollowings = () => {
@@ -93,6 +81,11 @@ class Profile extends React.Component {
       }
     }
     return null
+  }
+
+  buttonHandler = api_id => {
+    this.toggleModal()
+    this.props.buttonHandler(api_id)
   }
 
   render() {
@@ -145,7 +138,7 @@ class Profile extends React.Component {
               <div style={{ margin: "50px auto", width: "90%" }}>
                 <div className="row" >
                   <div className="col-12">
-                    <FavoriteGallery favCats={this.props.favCats} deleteHandler={this.deleteHandler} isModalOpen={this.state.isModalOpen} current_user={this.props.current_user} toggleModal={this.toggleModal} />
+                    <FavoriteGallery favCats={this.props.favCats} buttonHandler={this.buttonHandler} isModalOpen={this.state.isModalOpen} current_user={this.props.current_user} toggleModal={this.toggleModal} />
                   </div>
                 </div>
               </div>

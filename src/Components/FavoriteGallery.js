@@ -49,7 +49,7 @@ class FavoriteGallery extends React.Component {
           <ModalBody>
             <Row>
               <Col md="12">
-                <ImageCarousel images={this.props.favCats} deleteHandler={this.props.deleteHandler} currentIndex={this.state.currentIndex} current_user={this.props.current_user} button_color={"danger"} />
+                <ImageCarousel favCats={this.props.favCats} images={this.props.favCats} currentIndex={this.state.currentIndex} current_user={this.props.current_user} buttonHandler={this.props.buttonHandler} />
               </Col>
             </Row>
           </ModalBody>
