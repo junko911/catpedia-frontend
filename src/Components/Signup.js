@@ -21,7 +21,7 @@ class Signup extends React.Component {
     submitHandler = (event) => {
         event.preventDefault()
         this.props.signupHandler(this.state)
-        this.props.history.push('/')
+        this.props.history.push('/cats')
     }
 
     render() {
