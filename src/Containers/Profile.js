@@ -1,8 +1,8 @@
 import React from 'react'
-import { Button, Card, Row, Col, Modal, ModalHeader, ModalFooter, ModalBody } from 'reactstrap'
+import { Card, Row, Col, Modal, ModalHeader, ModalFooter, ModalBody } from 'reactstrap'
 import CatCard from '../Components/CatCard'
 import ImageCarousel from '../Components/ImageCarousel'
-import RecommendedUsers from './RecommendedUsers'
+import RecommendedUsers from '../Components/RecommendedUsers'
 
 class Profile extends React.Component {
 
