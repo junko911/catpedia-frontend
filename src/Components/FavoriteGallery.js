@@ -36,7 +36,7 @@ class FavoriteGallery extends React.Component {
   render() {
     return (
       <>
-        <div><i class="fas fa-heart"></i>  Your Favorite Cats</div>
+        <div><i class="fas fa-heart"></i>   Your Favorite Cats ({this.props.favCats.length})</div>
         <div className="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-md-2">
           {this.getImages()}
         </div>
