@@ -113,6 +113,20 @@ class App extends React.Component {
       })
   }
 
+  favHandler = cat => {
+    let token = localStorage.getItem("token")
+    let options = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        "accept": "applicatoin/json"
+      },
+      body: JSON.stringify(cat)
+    }
+    fetch("http://localhost:3000/api/v1/cat_fav", options)
+  }
+
   
   render() {
     let auth_link
@@ -136,7 +150,7 @@ class App extends React.Component {
             <Switch>
               <Route path="/signup" render={() => <Signup signupHandler={this.signupHandler} />} />
               <Route path="/login" render={() => <Login loginHandler={this.loginHandler} />} />
-              <Route path="/cats" render={() => <CatContainer current_user={this.state.user}/>} />
+              <Route path="/cats" render={() => <CatContainer current_user={this.state.user} favHandler={this.favHandler}/>} />
               <Route path="/breeds" component={BreedContainer} />
               <Route path="/profile" render={() => <Profile users={this.state.users} current_user={this.state.user} followHandler={this.followHandler} unFollowHandler={this.unFollowHandler} />} />
               <Route path="/upload_image" component={ImageUpload} />

@@ -52,26 +52,13 @@ class ImageCarousel extends React.Component {
 
 
   favHandler = () => {
-    let token = localStorage.getItem("token")
     let data = {
       cat: {
         api_id: this.props.images[this.state.activeIndex].id,
         url: this.props.images[this.state.activeIndex].url
       }
     }
-
-    let options = {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-        "accept": "applicatoin/json"
-      },
-      body: JSON.stringify(data)
-    }
-
-    fetch("http://localhost:3000/api/v1/cat_fav", options)
-    // console.log(this.props.images[this.state.activeIndex].id, this.props.images[this.state.activeIndex])
+    this.props.favHandler(data)
   }
 
 
