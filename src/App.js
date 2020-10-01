@@ -45,7 +45,10 @@ class App extends React.Component {
       body: JSON.stringify({ user: userObj })
     })
       .then(resp => resp.json())
-      .then(data => this.setState({ user: data.user }))
+      .then(data => {
+        localStorage.setItem("token", data.jwt)
+        this.setState({ user: data.user })
+      })
   }
 
   loginHandler = (userInfo) => {

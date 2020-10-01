@@ -64,7 +64,7 @@ export default class CatContainer extends React.Component {
     // console.log(this.state.catArray)
     return (
       <>
-        <div id="photos">{this.renderCats()}</div>
+        <div id="photos" style={{margin: "auto", width: "90%"}}>{this.renderCats()}</div>
         <Button
           onClick={this.clickHandler}
           color="primary"

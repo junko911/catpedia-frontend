@@ -143,7 +143,7 @@ class Profile extends React.Component {
               <Col md="4">
               <CardBody
               className="Recommended"
-              top
+              top="true"
               width="100%"
               >
                  <RecommendedUsers users={this.props.users} current_user={this.props.current_user} followHandler={this.props.followHandler} unFollowHandler={this.props.unFollowHandler} />
@@ -170,7 +170,7 @@ class Profile extends React.Component {
               textAlign: "center",
             }}>
               <h4 style={{ textAlign: "center" }}>Please signup or login!</h4>
-              <img src="https://http.cat/401" alt="Not authorized" />
+              {/* <img src="/images/placeholder-image.png" alt="Not authorized" /> */}
             </div>
         }
       </>
