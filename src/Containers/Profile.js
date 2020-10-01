@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Card, Row, Col, Modal, ModalHeader, ModalFooter, ModalBody } from 'reactstrap'
 import CatCard from '../Components/CatCard'
 import ImageCarousel from '../Components/ImageCarousel'
+import RecommendedUsers from './RecommendedUsers'
 
 class Profile extends React.Component {
 
@@ -145,6 +146,7 @@ class Profile extends React.Component {
           :
           <h3>Please signup or login!</h3>
         }
+        <RecommendedUsers users={this.props.users}/>
       </>
     )
   }
