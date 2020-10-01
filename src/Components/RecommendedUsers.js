@@ -43,7 +43,7 @@ const RecommendedUsers = props => {
     <>
       <div>Recommended Users</div>
       <div style={{ height: "200px", overflow: "scroll" }}>
-        <ul class="list-group">
+        <ul className="list-group">
           {getUserCards()}
         </ul>
       </div>
