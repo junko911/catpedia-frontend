@@ -1,7 +1,7 @@
 import React from 'react'
-import { Card, Row, Col, Modal, ModalHeader, ModalFooter, ModalBody } from 'reactstrap'
+import { Card } from 'reactstrap'
 import CatCard from '../Components/CatCard'
-import ImageCarousel from '../Components/ImageCarousel'
+import FavoriteGallery from '../Components/FavoriteGallery'
 import RecommendedUsers from '../Components/RecommendedUsers'
 
 class Profile extends React.Component {
@@ -24,10 +24,6 @@ class Profile extends React.Component {
     })
   }
 
-  catSetState = (data) => {
-    data.map(catObj => this.setState({ catArray: [...this.state.catArray, catObj] }))
-  }
-
   renderCats = () => {
     console.log("hello", this.state.catArray)
     return this.state.catArray.map((cat, index) => <CatCard showModalImage={this.showModalImage} url={cat.url} id={cat.id} slide={index} />)
@@ -37,7 +33,11 @@ class Profile extends React.Component {
     fetch(`http://localhost:3000/likes/${id}`, {
       method: "DELETE"
     })
-    this.setState({ catArray: [], isModalOpen: false }, this.componentDidMount)
+      .then(res => res.json())
+      .then(() => {
+        const newCatArray = this.state.catArray.filter(e => e.id !== id)
+        this.setState({ catArray: newCatArray }, () => this.toggleModal())
+      })
   }
 
   componentDidMount() {
@@ -49,10 +49,11 @@ class Profile extends React.Component {
         "content-type": "application/json",
         accept: "application/json"
       }
-    }
-    )
+    })
       .then(r => r.json())
-      .then(this.catSetState)
+      .then(data => {
+        this.setState({ catArray: data })
+      })
   }
 
   getFollowings = () => {
@@ -90,50 +91,39 @@ class Profile extends React.Component {
   }
 
   render() {
-
-    let moreCats = 'More!' + '\xa0\xa0'
     return (
       <>
-        <Card>Profile Card Here</Card>
-        <div id="photos">{this.renderCats()}</div>
-
-        <Modal
-          className="modal-xl"
-          isOpen={this.state.isModalOpen}
-          toggle={this.toggleModal}
-        >
-          <ModalHeader> Cat Gallery </ModalHeader>
-          <ModalBody>
-            <Row>
-              <Col md="12">
-                <ImageCarousel images={this.state.catArray} deleteHandler={this.deleteHandler} currentIndex={this.state.currentIndex} button_color={"danger"} />
-              </Col>
-            </Row>
-          </ModalBody>
-          <ModalFooter>
-
-          </ModalFooter>
-        </Modal>
-        {this.props.current_user && Object.keys(this.props.current_user).length !== 0 ?
-          <>
-            <div>Following</div>
-            <ul>{this.getFollowings()}</ul>
-            <div>Followers</div>
-            <ul>{this.getFollowers()}</ul>
-          </>
-          :
-          <h3>Please signup or login!</h3>
+        {
+          this.props.current_user && Object.keys(this.props.current_user).length !== 0 ?
+            <>
+              <Card>Profile Card Here</Card>
+              <>
+                <div>Following</div>
+                <ul>{this.getFollowings()}</ul>
+                <div>Followers</div>
+                <ul>{this.getFollowers()}</ul>
+              </>
+              <div style={{ margin: "50px auto", width: "90%" }}>
+                <div className="row" >
+                  <div className="col-9">
+                    <FavoriteGallery favCats={this.state.catArray} deleteHandler={this.deleteHandler} isModalOpen={this.state.isModalOpen} toggleModal={this.toggleModal} />
+                  </div>
+                  <div className="col-3">
+                    <RecommendedUsers users={this.props.users} current_user={this.props.current_user} followHandler={this.props.followHandler} unFollowHandler={this.props.unFollowHandler} />
+                  </div>
+                </div>
+              </div>
+            </>
+            :
+            <div style={{
+              width: "90%",
+              margin: "50px auto",
+              textAlign: "center",
+            }}>
+              <h4 style={{ textAlign: "center" }}>Please signup or login!</h4>
+              <img src="https://http.cat/401" alt="Not authorized" />
+            </div>
         }
-        <div style={{ margin: "50px auto", width: "90%" }}>
-          <div className="row" >
-            <div className="col-9">
-              <div style={{ border: "1px solid black", height: "600px" }}></div>
-            </div>
-            <div className="col-3">
-              <RecommendedUsers users={this.props.users} current_user={this.props.current_user} followHandler={this.props.followHandler} unFollowHandler={this.props.unFollowHandler}/>
-            </div>
-          </div>
-        </div>
       </>
     )
   }

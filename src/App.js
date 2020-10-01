@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css';
-import { BrowserRouter, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
 import NavBar from "./Components/Navbar"
 import Login from './Components/Login'
 import Signup from './Components/Signup'
@@ -60,9 +60,9 @@ class App extends React.Component {
       .then(r => r.json())
       .then(data => {
         localStorage.setItem("token", data.jwt)
-      this.setState({ user: data.user })
-    })
-}
+        this.setState({ user: data.user })
+      })
+  }
 
   logoutHandler = () => {
     localStorage.removeItem("token")
@@ -115,19 +115,22 @@ class App extends React.Component {
       <BrowserRouter>
         <div className="container">
           <div className="header">
-            <Link to="/"><h1><i className='fas'>&#xf1b0;</i>Catpedia</h1></Link>
+            <Link to="/cats"><h1><i className='fas'>&#xf1b0;</i>Catpedia</h1></Link>
             <div className="auth">
               {auth_link}
             </div>
           </div>
           <div className="gallery">
             <NavBar />
-            <Route path="/signup" render={() => <Signup signupHandler={this.signupHandler} />} />
-            <Route path="/login" render={() => <Login loginHandler={this.loginHandler} />} />
-            <Route path="/cats" component={CatContainer} />
-            <Route path="/breeds" component={BreedContainer} />
-            <Route path="/profile" render={() => <Profile users={this.state.users} current_user={this.state.user} followHandler={this.followHandler} unFollowHandler={this.unFollowHandler} />} />
-            <Route path="/upload_image" component={ImageUpload} />
+            <Switch>
+              <Route path="/signup" render={() => <Signup signupHandler={this.signupHandler} />} />
+              <Route path="/login" render={() => <Login loginHandler={this.loginHandler} />} />
+              <Route path="/cats" render={() => <CatContainer current_user={this.state.user}/>} />
+              <Route path="/breeds" component={BreedContainer} />
+              <Route path="/profile" render={() => <Profile users={this.state.users} current_user={this.state.user} followHandler={this.followHandler} unFollowHandler={this.unFollowHandler} />} />
+              <Route path="/upload_image" component={ImageUpload} />
+              <Route path="/" component={CatContainer} />
+            </Switch>
           </div>
         </div>
       </BrowserRouter>
