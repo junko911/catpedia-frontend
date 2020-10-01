@@ -47,7 +47,7 @@ class Profile extends React.Component {
   }
 
   deleteHandler = (id) => {
-    fetch(`http://localhost:3000/likes/${id}`, {
+    fetch(`http://localhost:3000/api/v1/likes/${id}`, {
       method: "DELETE"
     })
       .then(res => res.json())
@@ -59,7 +59,7 @@ class Profile extends React.Component {
 
   componentDidMount() {
     let token = localStorage.getItem("token")
-    fetch("http://localhost:3000/user_favs", {
+    fetch("http://localhost:3000/api/v1/user_favs", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,

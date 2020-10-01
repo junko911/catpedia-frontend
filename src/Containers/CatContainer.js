@@ -34,7 +34,7 @@ export default class CatContainer extends React.Component {
 
   APICall = () => {
     let token = localStorage.getItem("token")
-    fetch("http://localhost:3000/cats", {
+    fetch("http://localhost:3000/api/v1/cats", {
       method: "GET",
       headers: {
         "content-type": "application/json",
