@@ -122,14 +122,16 @@ class ImageCarousel extends React.Component {
             onClickHandler={this.next}
           />
         </Carousel>
-
-        <Button
-          color={this.props.button_color}
-          onClick={this.props.button_color === "success" ? this.favHandler : this.deleteHandler}
-          style={{display: "block", margin: "auto"}}
-        >
-          {this.props.button_color === "success" ? "Favorite" : "Unfavorite"}
-        </Button>
+        {this.props.current_user && Object.keys(this.props.current_user).length !== 0 ?
+          <Button
+            color={this.props.button_color}
+            onClick={this.props.button_color === "success" ? this.favHandler : this.deleteHandler}
+            style={{ display: "block", margin: "auto" }}
+          >
+            {this.props.button_color === "success" ? "Favorite" : "Unfavorite"}
+          </Button>
+          : null
+        }
       </>
     );
   }
