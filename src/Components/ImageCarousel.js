@@ -74,7 +74,7 @@ class ImageCarousel extends React.Component {
       body: JSON.stringify(data)
     }
 
-    fetch("http://localhost:3000/cat_fav", options)
+    fetch("http://localhost:3000/api/v1/cat_fav", options)
     // console.log(this.props.images[this.state.activeIndex].id, this.props.images[this.state.activeIndex])
   }
 
