@@ -61,6 +61,14 @@ class ImageCarousel extends React.Component {
     this.props.favHandler(data)
   }
 
+  buttonHandler = () => {
+    if(this.props.favCats.filter(cat => cat.api_id === this.props.images[this.state.activeIndex].id).length > 0) {
+      console.log("unfav")
+    } else {
+      this.favHandler()
+    }
+  }
+
 
   render() {
     const { images } = this.props;
@@ -78,6 +86,7 @@ class ImageCarousel extends React.Component {
         </CarouselItem>
       );
     });
+    let fav = this.props.favCats.filter(cat => cat.api_id === this.props.images[this.state.activeIndex].id).length > 0
 
     return (
       <>
@@ -105,11 +114,21 @@ class ImageCarousel extends React.Component {
         </Carousel>
         {this.props.current_user && Object.keys(this.props.current_user).length !== 0 ?
           <Button
-            color={this.props.button_color}
-            onClick={this.props.button_color === "success" ? this.favHandler : this.deleteHandler}
+            color={
+              fav ?
+                "danger"
+                :
+                "success"
+            }
+            onClick={this.buttonHandler}
             style={{ display: "block", margin: "auto" }}
           >
-            {this.props.button_color === "success" ? "Favorite" : "Unfavorite"}
+            {
+              fav ?
+                "Unfavorite"
+                :
+                "Favorite"
+            }
           </Button>
           : null
         }
