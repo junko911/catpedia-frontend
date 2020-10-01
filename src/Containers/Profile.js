@@ -1,7 +1,8 @@
 import React from 'react'
-import { Button, Card, Row, Col, Modal, ModalHeader, ModalFooter, ModalBody } from 'reactstrap'
+import { Card, Row, Col, Modal, ModalHeader, ModalFooter, ModalBody } from 'reactstrap'
 import CatCard from '../Components/CatCard'
 import ImageCarousel from '../Components/ImageCarousel'
+import RecommendedUsers from '../Components/RecommendedUsers'
 
 class Profile extends React.Component {
 
@@ -33,7 +34,6 @@ class Profile extends React.Component {
   }
 
   deleteHandler = (id) => {
-
     fetch(`http://localhost:3000/likes/${id}`, {
       method: "DELETE"
     })
@@ -53,25 +53,6 @@ class Profile extends React.Component {
     )
       .then(r => r.json())
       .then(this.catSetState)
-  }
-
-  getAllUsers = () => {
-    return this.props.users.map(user => {
-      return (
-        <li key={user.id}>
-          {user.username}
-          {this.props.current_user.followers && this.props.current_user.followers.filter(e => e.id === user.id).length > 0 ?
-            <Button color="primary" size="sm" onClick={() => this.props.unFollowHandler(user)}>
-              Unfollow
-            </Button>
-            :
-            <Button color="primary" size="sm" onClick={() => this.props.followHandler(user)}>
-              Follow
-          </Button>
-          }
-        </li>
-      )
-    })
   }
 
   getFollowings = () => {
@@ -135,8 +116,6 @@ class Profile extends React.Component {
         </Modal>
         {this.props.current_user && Object.keys(this.props.current_user).length !== 0 ?
           <>
-            <div>Users</div>
-            <ul>{this.getAllUsers()}</ul>
             <div>Following</div>
             <ul>{this.getFollowings()}</ul>
             <div>Followers</div>
@@ -145,6 +124,16 @@ class Profile extends React.Component {
           :
           <h3>Please signup or login!</h3>
         }
+        <div style={{ margin: "50px auto", width: "90%" }}>
+          <div className="row" >
+            <div className="col-9">
+              <div style={{ border: "1px solid black", height: "600px" }}></div>
+            </div>
+            <div className="col-3">
+              <RecommendedUsers users={this.props.users} current_user={this.props.current_user} followHandler={this.props.followHandler} unFollowHandler={this.props.unFollowHandler}/>
+            </div>
+          </div>
+        </div>
       </>
     )
   }
