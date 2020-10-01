@@ -40,15 +40,6 @@ class Profile extends React.Component {
     })
   }
 
-  renderCats = () => {
-    console.log("hello", this.props.favCats)
-    return this.props.favCats.map((cat, index) => <CatCard showModalImage={this.showModalImage} url={cat.url} id={cat.id} slide={index} />)
-  }
-
-  componentDidMount() {
-    let token = localStorage.getItem("token")
-  }
-
   getFollowings = () => {
     if (this.props.current_user.followers) {
       if (this.props.current_user.followers.length === 0) {
