@@ -1,12 +1,10 @@
 import React from "react";
-import { useState } from 'react'
 import {
   Button,
   Carousel,
   CarouselItem,
   CarouselControl,
-  CarouselIndicators,
-  CarouselCaption
+  CarouselIndicators
 } from "reactstrap";
 
 class ImageCarousel extends React.Component {

@@ -4,11 +4,11 @@ import { Button } from 'reactstrap'
 const RecommendedUsers = props => {
 
   const genUserCard = user => {
-    const avator = user.avator ? user.avator : "/images/cat-placeholder.png"
+    const avatar = user.avatar ? user.avatar : "/images/cat-placeholder.png"
     return (
       <li key={user.id} className="list-group-item d-flex justify-content-between align-items-center">
         <img
-          src={avator}
+          src={avatar}
           alt={user.username}
           style={
             {
@@ -40,7 +40,7 @@ const RecommendedUsers = props => {
 
   return (
     <>
-      <div><i class="fas fa-users"></i>   Recommended Users</div>
+      <div><i className="fas fa-users"></i>   Recommended Users</div>
       <div style={{ height: "200px", overflow: "scroll" }}>
         <ul className="list-group">
           {getUserCards()}
