@@ -43,7 +43,6 @@ class UserCarousel extends React.Component{
       };
         
   render() {
-
     const { users } = this.props;
     const { activeIndex } = this.state;
     // console.log(images, activeIndex)
@@ -78,10 +77,10 @@ class UserCarousel extends React.Component{
                   <CardText>
                     {user.bio}
                   </CardText>
-                  <Alert color="primary">Followers: {user.followers}</Alert>
+                  <Alert color="primary">Followers: {user.followers.length}</Alert>
                   <br/>
                   <br/>
-                  <Alert color="primary">Following: {user.followeds}</Alert>
+                  <Alert color="primary">Following: {user.followeds.length}</Alert>
 
                 </CardBody>
               </Col>

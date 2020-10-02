@@ -6,7 +6,6 @@ import ImageCarousel from '../Components/ImageCarousel'
 export default class CatContainer extends React.Component {
 
   state = {
-    catArray: [],
     isModalOpen: false,
     imagesToShow: 30,
     currentIndex: 0
@@ -24,39 +23,13 @@ export default class CatContainer extends React.Component {
     })
   }
 
-  catSetState = (data) => {
-    data.map(catObj => this.setState({ catArray: [...this.state.catArray, catObj] }))
-  }
-
   renderCats = () => {
-    return this.state.catArray.map((cat, index) => <CatCard key={cat.id} showModalImage={this.showModalImage} url={cat.url} breeds={cat.breeds} id={cat.id} slide={index} />)
-  }
-
-  APICall = () => {
-    fetch("http://localhost:3000/api/v1/cats", {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        accept: "application/json"
-      }
-    }
-    )
-      .then(r => r.json())
-      .then(this.catSetState)
-  }
-
-  favHandler = () => {
-    return console.log(this.state.currentIndex)
-  }
-
-  componentDidMount() {
-    this.APICall()
+    return this.props.cats.map((cat, index) => <CatCard key={cat.id} showModalImage={this.showModalImage} url={cat.url} breeds={cat.breeds} id={cat.id} slide={index} />)
   }
 
   clickHandler = () => {
-    this.componentDidMount()
+    this.props.renderCats()
   }
-
 
   render() {
     let moreCats = 'More!' + '\xa0\xa0'
@@ -86,7 +59,7 @@ export default class CatContainer extends React.Component {
           <ModalBody>
             <Row>
               <Col md="12">
-                <ImageCarousel images={this.state.catArray} button_color={"success"} currentIndex={this.state.currentIndex} current_user={this.props.current_user} />
+                <ImageCarousel images={this.props.cats} currentIndex={this.state.currentIndex} current_user={this.props.current_user} favHandler={this.props.favHandler} unFavHandler={this.props.unFavHandler} favCats={this.props.favCats}/>
               </Col>
             </Row>
           </ModalBody>

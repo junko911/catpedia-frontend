@@ -50,33 +50,23 @@ class ImageCarousel extends React.Component {
     this.props.deleteHandler(this.props.images[this.state.activeIndex].id)
   }
 
-
   favHandler = () => {
-    let token = localStorage.getItem("token")
-    let data = {
-      cat: {
-        api_id: this.props.images[this.state.activeIndex].id,
-        url: this.props.images[this.state.activeIndex].url
-      }
-    }
-
-    let options = {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-        "accept": "applicatoin/json"
-      },
-      body: JSON.stringify(data)
-    }
-
-    fetch("http://localhost:3000/api/v1/cat_fav", options)
-    // console.log(this.props.images[this.state.activeIndex].id, this.props.images[this.state.activeIndex])
+    const id = this.props.images[this.state.activeIndex].api_id ? this.props.images[this.state.activeIndex].api_id : this.props.images[this.state.activeIndex].id
+    this.props.favHandler(id)
   }
 
+  unFavHandler = () => {
+    const id = this.props.images[this.state.activeIndex].api_id ? this.props.images[this.state.activeIndex].api_id : this.props.images[this.state.activeIndex].id
+    this.props.unFavHandler(id)
+  }
 
   render() {
-    const { images } = this.props;
+    let id = 0
+    if (this.props.images[this.state.activeIndex]) {
+      id = this.props.images[this.state.activeIndex].api_id ? this.props.images[this.state.activeIndex].api_id : this.props.images[this.state.activeIndex].id
+    }
+    const fav = this.props.favCats.filter(cat => cat.api_id === id).length > 0
+    const { images } = this.props
     const { activeIndex } = this.state;
     const slides = images.map((image, index) => {
       return (
@@ -117,13 +107,30 @@ class ImageCarousel extends React.Component {
           />
         </Carousel>
         {this.props.current_user && Object.keys(this.props.current_user).length !== 0 ?
-          <Button
-            color={this.props.button_color}
-            onClick={this.props.button_color === "success" ? this.favHandler : this.deleteHandler}
-            style={{ display: "block", margin: "auto" }}
-          >
-            {this.props.button_color === "success" ? "Favorite" : "Unfavorite"}
-          </Button>
+          <>
+            {
+              fav ?
+                <>
+                  <Button
+                    color="danger"
+                    onClick={this.unFavHandler}
+                    style={{ display: "block", margin: "auto" }}
+                  >
+                    Unfavorite
+                  </Button>
+                </>
+                :
+                <>
+                  <Button
+                    color="success"
+                    onClick={this.favHandler}
+                    style={{ display: "block", margin: "auto" }}
+                  >
+                    Favorite
+                  </Button>
+                </>
+            }
+          </>
           : null
         }
       </>

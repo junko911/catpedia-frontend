@@ -15,6 +15,7 @@ class ImageUpload extends React.Component {
       const file = files[0]
       const xhr = new XMLHttpRequest()
       const fd = new FormData()
+      const token = localStorage.getItem("token")
 
       xhr.addEventListener("readystatechange", () => {
         if (this.readyState === this.DONE) {
@@ -23,8 +24,9 @@ class ImageUpload extends React.Component {
       })
 
       // Initiate a multipart/form-data upload
-      xhr.open("POST", "http://localhost:3000/api/v1/cats");
-      fd.append('file', file);      
+      xhr.open("POST", "http://localhost:3000/api/v1/cats")
+      xhr.setRequestHeader("Authorization", `Bearer ${token}`)
+      fd.append('file', file)
       xhr.send(fd)
     })
   }
