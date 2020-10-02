@@ -100,7 +100,7 @@ class Profile extends React.Component {
                       </Col>
                       <Col md="4">
                         <CardBody>
-                          <CardTitle>{this.props.current_user.name}</CardTitle>
+                          <CardTitle style={{fontSize: "30px"}}>{this.props.current_user.name}</CardTitle>
                           <CardSubtitle>@{this.props.current_user.username}</CardSubtitle>
                           <CardText style={{margin:"20px auto"}}>
                             Bio: {this.props.current_user.bio}

@@ -95,7 +95,7 @@ class UserCarousel extends React.Component {
                 <Col>
                   <br />
                   <br />
-                  {user.name}
+                  <h2>{user.name}</h2>
                 </Col>
               </Row>
               <br></br>

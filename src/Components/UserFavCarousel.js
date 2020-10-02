@@ -140,7 +140,7 @@ class UserFavCarousel extends React.Component {
             }
           </>
           :
-          <h3 style={{ textAlign: "center" }}>No images found.</h3>
+          <h3 style={{ textAlign: "center" }}>This user doesn't have favorite images yet!</h3>
         }
       </>
     )
