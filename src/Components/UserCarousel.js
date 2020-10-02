@@ -88,7 +88,7 @@ class UserCarousel extends React.Component{
         >
           <Row>
             <Col md="8">
-                <img alt="" width="100%" id= "randomImage" className="img-fluid" src={user.avatar}/>
+                <img alt="" width="100%" id= "randomImage" className="img-fluid" src={user.avatar ? user.avatar : "https://cdn1.vectorstock.com/i/thumb-large/82/55/anonymous-user-circle-icon-vector-18958255.jpg"}/>
             </Col>
             <Col md="4">
               <Row>
