@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Col, CardImg, Row, CardBody, CardTitle, CardSubtitle, CardText, Button } from 'reactstrap'
+import { Popover, PopoverBody, Card, Col, CardImg, Row, CardBody, CardTitle, CardSubtitle, CardText, Button } from 'reactstrap'
 import FavoriteGallery from '../Components/FavoriteGallery'
 import RecommendedUsers from '../Components/RecommendedUsers'
 import UserModal from '../Components/UserModal'
@@ -7,6 +7,8 @@ import UserModal from '../Components/UserModal'
 class Profile extends React.Component {
 
   state = {
+    followersError: false,
+    followingError: false,
     isModalOpen: false,
     imagesToShow: 30,
     currentIndex: 0,
@@ -18,14 +20,26 @@ class Profile extends React.Component {
     this.setState({ isModalOpen: !this.state.isModalOpen })
   }
 
+  popoverToggle = () => {
+    this.setState({followersError: false, followingError: false})
+  }
+
   renderFollowers = () => {
-    this.toggleUserModal()
-    this.setState({ modalUsers: this.props.current_user.followers, userModal: !this.state.userModal })
+    if (this.props.current_user.followers.length === 0){
+      this.setState({followersError: true})
+    }else{
+      this.toggleUserModal()
+      this.setState({ modalUsers: this.props.current_user.followers, userModal: !this.state.userModal })
+    }
   }
 
   renderFollowing = () => {
+    if (this.props.current_user.followeds.length === 0){
+      this.setState({followingError: true})
+    }else{
     this.toggleUserModal()
     this.setState({ modalUsers: this.props.current_user.followeds, userModal: !this.state.userModal })
+    }
   }
 
   toggleUserModal = () => {
@@ -105,10 +119,10 @@ class Profile extends React.Component {
                           <CardText style={{margin:"20px auto"}}>
                             Bio: {this.props.current_user.bio}
                           </CardText>
-                          <Button color="info" onClick={this.renderFollowers}>Followings: {this.props.current_user.followers.length}</Button>
+                          <Button id="followersError" color="info" onClick={this.renderFollowers}>Followings: {this.props.current_user.followers.length}</Button>
                           <br />
                           <br />
-                          <Button color="info" onClick={this.renderFollowing}>Followers: {this.props.current_user.followeds.length}</Button>
+                          <Button id="followingsError" color="info" onClick={this.renderFollowing}>Followers: {this.props.current_user.followeds.length}</Button>
                         </CardBody>
                       </Col>
                       <Col md="4">
@@ -133,6 +147,12 @@ class Profile extends React.Component {
                 </div>
               </div>
               <UserModal userFavsHandler={this.props.userFavsHandler} current_user={this.props.current_user} favCats={this.props.favCats} unFollowHandler={this.props.unFollowHandler} users={this.state.modalUsers} userModal={this.state.userModal} toggleModal={this.toggleUserModal} favHandler={this.props.favHandler} unFavHandler={this.props.unFavHandler} />
+              <Popover placement="right" isOpen={this.state.followersError} target="followersError" toggle={this.popoverToggle}>
+                <PopoverBody>Make Sure to Follow Other Users!</PopoverBody>
+              </Popover>
+              <Popover placement="right" isOpen={this.state.followingError} target="followingsError" toggle={this.popoverToggle}>
+                <PopoverBody>No Other Users Currently Following You</PopoverBody>
+              </Popover>
             </>
             :
             <div style={{
