@@ -1,6 +1,8 @@
 import React from 'react'
 import {Button, Row, Col, Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Alert } from 'reactstrap'
 import {Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption} from "reactstrap";
+import ImageCarousel from './ImageCarousel'
+
 
 
 class UserCarousel extends React.Component{
@@ -74,16 +76,28 @@ class UserCarousel extends React.Component{
         >
           <Row>
             <Col md="8">
-            {/* <img className="img-card h-100" width="100%" src="https://media.wired.com/photos/598e35994ab8482c0d6946e0/master/w_2560%2Cc_limit/phonepicutres-TA.jpg"/> */}
-              <Row>
-                <Col md="6">
-              <img className="img-fluid" width="100%" src="https://media.wired.com/photos/598e35994ab8482c0d6946e0/master/w_2560%2Cc_limit/phonepicutres-TA.jpg"/>
-                </Col>
-                <Col md="6">{user.bio}</Col>
-              </Row>
+                <img id= "randomImage" className="img-fluid" src="https://upload.wikimedia.org/wikipedia/commons/6/6a/A_blank_flag.png"/>
             </Col>
             <Col md="4">
-              {/* <img className="img-card h-100" width="100%" src="https://media.wired.com/photos/598e35994ab8482c0d6946e0/master/w_2560%2Cc_limit/phonepicutres-TA.jpg"/> */}
+              <Row>
+                <Col>
+                <br/>
+                <br/>
+                {user.name}
+                </Col>
+               
+              </Row>
+              <br></br>
+              <Row>
+                <Col>
+                {user.username}
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+          <Row>
+            <Col id="bio_box">
+            This is my fake bio i want it to be decently long so that i can see how it fills up some space thanks a ton
             </Col>
           </Row>
     </CarouselItem>
@@ -93,6 +107,7 @@ class UserCarousel extends React.Component{
     return (
       <>
         <Carousel
+        interval= {false}
           activeIndex={activeIndex}
           next={this.next}
           previous={this.previous}
@@ -114,6 +129,7 @@ class UserCarousel extends React.Component{
             onClickHandler={this.next}
             />
         </Carousel>
+        <ImageCarousel currentIndex={0} current_user={this.props.current_user} images={this.props.images}/>
         {/* {this.props.current_user && Object.keys(this.props.current_user).length !== 0 ?
           <Button
           color={this.props.button_color}
@@ -127,19 +143,6 @@ class UserCarousel extends React.Component{
       </>
     );
   }
-
-
-
-//   <Row>
-//   <Col md="8">
-    
-//     <Row>
-//       <Col md="6">.col-md-6</Col>
-//       <Col md="6">.col-md-6</Col>
-//     </Row>
-//   </Col>
-//   <Col md="4">.col-md-4</Col>
-// </Row>
 }
 
 export default UserCarousel
