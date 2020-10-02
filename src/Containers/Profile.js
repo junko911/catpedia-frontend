@@ -94,7 +94,7 @@ class Profile extends React.Component {
                 className = "profile_pic"
                   top
                   width="100%"
-                  src="https://media.wired.com/photos/598e35994ab8482c0d6946e0/master/w_2560%2Cc_limit/phonepicutres-TA.jpg"
+                  src={this.props.current_user.avatar}
                   alt="Card image cap"
                 />
               </Col>

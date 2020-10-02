@@ -20,6 +20,10 @@ class App extends React.Component {
     favCats: []
   }
 
+  popToggle = () => {
+    this.setState({poOpen: !this.state.poOpen})
+}
+
   componentDidMount() {
     const token = localStorage.getItem("token")
     if (token) {
@@ -99,6 +103,9 @@ class App extends React.Component {
       .then(data => {
         localStorage.setItem("token", data.jwt)
         this.setState({ user: data.user })
+      })
+      .catch(function(error){
+        this.setState({poOpen2: true})
       })
   }
 
@@ -192,9 +199,9 @@ class App extends React.Component {
   render() {
     let auth_link
     if (!this.state.user || Object.keys(this.state.user).length === 0) {
-      auth_link = <><Signup poOpen={this.state.poOpen} signupHandler={this.signupHandler} /><Login loginHandler={this.loginHandler} /></>
+      auth_link = <><Signup popToggle ={this.popToggle} poOpen={this.state.poOpen} signupHandler={this.signupHandler} /><Login popToggle ={this.popToggle} poOpen={this.state.poOpen} loginHandler={this.loginHandler} /></>
     } else {
-      auth_link = <Logout logoutHandler={this.logoutHandler} />
+      auth_link = <Logout poOpen2={this.state.poOpen2} logoutHandler={this.logoutHandler} />
     }
 
     return (
@@ -210,7 +217,7 @@ class App extends React.Component {
             <NavBar />
             <Switch>
               <Route path="/signup" render={() => <Signup poOpen={this.state.poOpen} signupHandler={this.signupHandler} />} />
-              <Route path="/login" render={() => <Login loginHandler={this.loginHandler} />} />
+              <Route path="/login" render={() => <Login poOpen2={this.state.poOpen2} loginHandler={this.loginHandler} />} />
               <Route path="/cats" render={() => <CatContainer current_user={this.state.user} favHandler={this.favHandler} unFavHandler={this.deleteHandler} cats={this.state.cats} favCats={this.state.favCats} renderCats={this.renderCats}/>} />
               <Route path="/breeds" component={BreedContainer} />
               <Route path="/profile" render={() => <Profile userFavsHandler= {this.userFavsHandler} favHandler={this.favHandler} unFavHandler={this.deleteHandler} favCats={this.state.favCats} users={this.state.users} current_user={this.state.user} followHandler={this.followHandler} unFollowHandler={this.unFollowHandler} favCats={this.state.favCats} favHandler={this.favHandler} unFavHandler={this.deleteHandler} />} />
