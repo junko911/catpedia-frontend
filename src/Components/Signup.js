@@ -10,8 +10,17 @@ class Signup extends React.Component {
 
 
     state = {
+<<<<<<< HEAD
         poOpen: false,
         modal: false,
+=======
+        username: "",
+        name: "",
+        password: "",
+        bio: "",
+        modal: false,
+        file: ""
+>>>>>>> Set patch http request for user image
     }
 
     handleValidSubmit = (event, values) => {
@@ -75,6 +84,7 @@ class Signup extends React.Component {
         this.setState({poOpen: !this.state.poOpen})
     }
 
+<<<<<<< HEAD
     // changeHandler = (event) => {
     //     this.setState({ [event.target.name]: event.target.value })
     // }
@@ -134,6 +144,48 @@ class Signup extends React.Component {
     //         </div>
     //     )
     // }
+=======
+    submitHandler = (event) => {
+        let userObj = {
+            username: this.state.username,
+            name: this.state.name,
+            password: this.state.password,
+            bio: this.state.bio
+        }
+        event.preventDefault()
+        this.props.signupHandler(userObj, this.state.file)
+        this.props.history.push('/cats')
+    }
+
+    uploadHandler = e => {
+        this.setState({ file: e.target.files[0] }) 
+    }
+
+    render() {
+        return (
+            <div>
+                <Button color="success" onClick={this.toggle} style={{ marginRight: "10px" }}>Signup</Button>
+                <Modal isOpen={this.state.modal} toggle={this.toggle}>
+                    <ModalHeader toggle={this.toggle}>Plase Signup</ModalHeader>
+                    <ModalBody>
+                        <form onSubmit={this.submitHandler}>
+                            <div className="modal-body">
+                                <input name="username" value={this.state.username} onChange={this.changeHandler} placeholder="Username..."></input>
+                                <input name="name" value={this.state.name} onChange={this.changeHandler} placeholder="Name..."></input>
+                                <input name="password" value={this.state.password} onChange={this.changeHandler} placeholder="Password..."></input>
+                                <input type="file" name="avatar" value={this.state.avatar} onChange={this.uploadHandler} placeholder="Profile Picture..."></input>
+                                <input name="bio" value={this.state.bio} onChange={this.changeHandler} placeholder="A little about yourself..."></input>
+                            </div>
+                            <div className="modal-footer">
+                                <input type="submit" className="btn btn-success" value="Signup" />
+                            </div>
+                        </form>
+                    </ModalBody>
+                </Modal>
+            </div>
+        )
+    }
+>>>>>>> Set patch http request for user image
 }
 
 export default withRouter(Signup)

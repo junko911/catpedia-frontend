@@ -71,7 +71,7 @@ class App extends React.Component {
     data.map(catObj => this.setState({ cats: [...this.state.cats, catObj] }))
   }
 
-  signupHandler = (userObj) => {
+  signupHandler = (userObj, file) => {
     fetch("http://localhost:3000/api/v1/users", {
       method: "POST",
       headers: {
@@ -83,7 +83,15 @@ class App extends React.Component {
       .then(resp => resp.json())
       .then(data => {
         localStorage.setItem("token", data.jwt)
-        this.setState({ user: data.user })
+        this.setState({ user: data.user }, () => {
+          const token = localStorage.getItem("token")
+          const xhr = new XMLHttpRequest()
+          const fd = new FormData()
+          xhr.open("PATCH", `http://localhost:3000/api/v1/users/${data.user.id}`)
+          xhr.setRequestHeader("Authorization", `Bearer ${token}`)
+          fd.append('avatar', file)
+          xhr.send(fd)
+        })
       })
       .catch(function(error){
         this.setState({poOpen: true})

@@ -77,7 +77,7 @@ class ImageUpload extends React.Component {
   uploadedAlert = () => {
     return (
       <Alert color="success">
-        The image is uploaded successfully!
+        The image is uploaded successfully! Check your profile page!
       </Alert>
     )
   }
