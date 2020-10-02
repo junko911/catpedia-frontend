@@ -88,7 +88,7 @@ class UserCarousel extends React.Component{
         >
           <Row>
             <Col md="8">
-                <img id= "randomImage" className="img-fluid" src="https://upload.wikimedia.org/wikipedia/commons/6/6a/A_blank_flag.png"/>
+                <img width="100%" id= "randomImage" className="img-fluid" src={user.avatar}/>
             </Col>
             <Col md="4">
               <Row>
@@ -104,6 +104,7 @@ class UserCarousel extends React.Component{
               <Row>
                 <Col>
                 {user.username}
+            <Button style={{ display: "block", margin: "auto" }} color="info" onClick={() => this.userFavsHandler(user.id)}>Click Me for User Favs</Button>
                
                 </Col>
               </Row>
@@ -111,13 +112,12 @@ class UserCarousel extends React.Component{
           </Row>
           <Row>
             <Col id="bio_box">
-            This is my fake bio i want it to be decently long so that i can see how it fills up some space thanks a ton
+              {user.bio}
             </Col>
             <br/>
           </Row>
           <Row>
 
-            <Button style={{ display: "block", margin: "auto" }} color="info" onClick={() => this.userFavsHandler(user.id)}>Click Me for User Favs</Button>
           </Row>
     </CarouselItem>
       );
