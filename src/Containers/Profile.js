@@ -1,6 +1,5 @@
 import React from 'react'
 import { Card, Col, CardImg, Row, CardBody, CardTitle, CardSubtitle, CardText, Button } from 'reactstrap'
-import CatCard from '../Components/CatCard'
 import FavoriteGallery from '../Components/FavoriteGallery'
 import RecommendedUsers from '../Components/RecommendedUsers'
 import UserModal from '../Components/UserModal'
@@ -85,56 +84,55 @@ class Profile extends React.Component {
         {
           this.props.current_user && Object.keys(this.props.current_user).length !== 0 ?
             <>
-     <Row>
-        <Col>
-          <Card>
-            <Row className="no-gutters">
-              <Col className= "pic_container" md="4">
-                <CardImg
-                className = "profile_pic"
-                  top
-                  width="100%"
-                  src={this.props.current_user.avatar}
-                  alt="Card image cap"
-                />
-              </Col>
-              <Col md="4">
-                <CardBody>
-                  <CardTitle>{this.props.current_user.name}</CardTitle>
-                  <CardSubtitle>@{this.props.current_user.username}</CardSubtitle>
-                  <CardText>
-                    Bio: {this.props.current_user.bio}
-                  </CardText>
-                  <Button color = "info" onClick={this.renderFollowers}>Followers: {this.props.current_user.followers.length}</Button>
-                  <br/>
-                  <br/>
-                  <Button color= "info" onClick={this.renderFollowing}>Following: {this.props.current_user.followeds.length}</Button>
+              <Row>
+                <Col>
+                  <Card>
+                    <Row className="no-gutters">
+                      <Col className="pic_container" md="4">
+                        <CardImg
+                          className="profile_pic"
+                          top
+                          width="100%"
+                          src={this.props.current_user.avatar ? this.props.current_user.avatar : "https://cdn1.vectorstock.com/i/thumb-large/82/55/anonymous-user-circle-icon-vector-18958255.jpg"}
+                          alt="Card image cap"
+                        />
+                        {/* <Button size="sm" style={{ margin: "10px auto", display: "block" }}>Edit</Button> */}
+                      </Col>
+                      <Col md="4">
+                        <CardBody>
+                          <CardTitle style={{fontSize: "30px"}}>{this.props.current_user.name}</CardTitle>
+                          <CardSubtitle>@{this.props.current_user.username}</CardSubtitle>
+                          <CardText style={{margin:"20px auto"}}>
+                            Bio: {this.props.current_user.bio}
+                          </CardText>
+                          <Button color="info" onClick={this.renderFollowers}>Followings: {this.props.current_user.followers.length}</Button>
+                          <br />
+                          <br />
+                          <Button color="info" onClick={this.renderFollowing}>Followers: {this.props.current_user.followeds.length}</Button>
+                        </CardBody>
+                      </Col>
+                      <Col md="4">
+                        <CardBody
+                          className="Recommended"
+                          top="true"
+                          width="100%"
+                        >
+                          <RecommendedUsers users={this.props.users} current_user={this.props.current_user} followHandler={this.props.followHandler} unFollowHandler={this.props.unFollowHandler} />
+                        </CardBody>
 
-                </CardBody>
-              </Col>
-              <Col md="4">
-              <CardBody
-              className="Recommended"
-              top="true"
-              width="100%"
-              >
-                 <RecommendedUsers users={this.props.users} current_user={this.props.current_user} followHandler={this.props.followHandler} unFollowHandler={this.props.unFollowHandler} />
-              </CardBody>
-              
-              </Col>
-            </Row>
-          </Card>
-        </Col>
-      </Row>
-        <div style={{ margin: "50px auto", width: "90%" }}>
-        <div className="row" >
-            <div className="col-12">
-            <FavoriteGallery favCats={this.props.favCats} favHandler={this.props.favHandler} unFavHandler={this.unFavHandler} isModalOpen={this.state.isModalOpen} current_user={this.props.current_user} toggleModal={this.toggleModal} />
-            </div>
-        </div>
-        </div>
-        <UserModal userFavsHandler={this.props.userFavsHandler} current_user={this.props.current_user} favCats={this.props.favCats} unFollowHandler= {this.props.unFollowHandler} users={this.state.modalUsers} userModal={this.state.userModal} toggleModal={this.toggleUserModal} favHandler={this.props.favHandler} unFavHandler={this.props.unFavHandler}/>
-
+                      </Col>
+                    </Row>
+                  </Card>
+                </Col>
+              </Row>
+              <div style={{ margin: "50px auto", width: "90%" }}>
+                <div className="row" >
+                  <div className="col-12">
+                    <FavoriteGallery favCats={this.props.favCats} favHandler={this.props.favHandler} unFavHandler={this.unFavHandler} isModalOpen={this.state.isModalOpen} current_user={this.props.current_user} toggleModal={this.toggleModal} />
+                  </div>
+                </div>
+              </div>
+              <UserModal userFavsHandler={this.props.userFavsHandler} current_user={this.props.current_user} favCats={this.props.favCats} unFollowHandler={this.props.unFollowHandler} users={this.state.modalUsers} userModal={this.state.userModal} toggleModal={this.toggleUserModal} favHandler={this.props.favHandler} unFavHandler={this.props.unFavHandler} />
             </>
             :
             <div style={{
@@ -143,7 +141,6 @@ class Profile extends React.Component {
               textAlign: "center",
             }}>
               <h4 style={{ textAlign: "center" }}>Please signup or login!</h4>
-              {/* <img src="/images/placeholder-image.png" alt="Not authorized" /> */}
             </div>
         }
       </>

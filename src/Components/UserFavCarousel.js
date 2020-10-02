@@ -52,9 +52,9 @@ class UserFavCarousel extends React.Component {
 
 
   favHandler = () => {
-    let resultsArray = this.props.userFavs.map(elm => ({ id: elm.api_id}));
+    let resultsArray = this.props.userFavs.map(elm => ({ id: elm.api_id }));
     console.log(this.props.userFavs)
-    
+
     const id = this.props.images[this.state.activeIndex].api_id ? this.props.images[this.state.activeIndex].api_id : this.props.images[this.state.activeIndex].id
     this.props.favHandler(id, resultsArray)
   }
@@ -85,60 +85,65 @@ class UserFavCarousel extends React.Component {
         </CarouselItem>
       );
     });
-
     return (
       <>
-        <Carousel
-          activeIndex={activeIndex}
-          next={this.next}
-          previous={this.previous}
-        >
-          <CarouselIndicators
-            items={images}
-            activeIndex={activeIndex}
-            onClickHandler={this.goToIndex}
-          />
-          {slides}
-          <CarouselControl
-            direction="prev"
-            directionText="Previous"
-            onClickHandler={this.previous}
-          />
-          <CarouselControl
-            direction="next"
-            directionText="Next"
-            onClickHandler={this.next}
-          />
-        </Carousel>
-        {this.props.current_user && Object.keys(this.props.current_user).length !== 0 ?
+        {images.length > 0 ?
           <>
-            {
-              fav ?
-                <>
-                  <Button
-                    color="danger"
-                    onClick={this.unFavHandler}
-                    style={{ display: "block", margin: "auto" }}
-                  >
-                    Unfavorite
+            <Carousel
+              activeIndex={activeIndex}
+              next={this.next}
+              previous={this.previous}
+            >
+              <CarouselIndicators
+                items={images}
+                activeIndex={activeIndex}
+                onClickHandler={this.goToIndex}
+              />
+              {slides}
+              <CarouselControl
+                direction="prev"
+                directionText="Previous"
+                onClickHandler={this.previous}
+              />
+              <CarouselControl
+                direction="next"
+                directionText="Next"
+                onClickHandler={this.next}
+              />
+            </Carousel>
+            {this.props.current_user && Object.keys(this.props.current_user).length !== 0 ?
+              <>
+                {
+                  fav ?
+                    <>
+                      <Button
+                        color="danger"
+                        onClick={this.unFavHandler}
+                        style={{ display: "block", margin: "auto" }}
+                      >
+                        Unfavorite
                   </Button>
-                </>
-                :
-                <>
-                  <Button
-                    color="success"
-                    onClick={this.favHandler}
-                    style={{ display: "block", margin: "auto" }}
-                  >
-                    Favorite
+                    </>
+                    :
+                    <>
+                      <Button
+                        color="success"
+                        onClick={this.favHandler}
+                        style={{ display: "block", margin: "auto" }}
+                      >
+                        Favorite
                   </Button>
-                </>
+                    </>
+                }
+              </>
+              : null
             }
           </>
-          : null
+          :
+          <h3 style={{ textAlign: "center" }}>This user doesn't have favorite images yet!</h3>
         }
       </>
-    );
+    )
   }
 }
 

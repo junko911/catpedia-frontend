@@ -19,7 +19,7 @@ class ImageUpload extends React.Component {
 
       xhr.addEventListener("readystatechange", () => {
         if (this.readyState === this.DONE) {
-          this.setState({uploaded: true})
+          this.setState({ uploaded: true })
         }
       })
 
@@ -75,38 +75,53 @@ class ImageUpload extends React.Component {
   }
 
   uploadedAlert = () => {
-    return(
+    return (
       <Alert color="success">
-        The image is uploaded successfully!
+        The image is uploaded successfully! Check your profile page!
       </Alert>
     )
   }
 
   render() {
     return (
-      <div className="form-container">
-        <h2>Upload a .jpg or .png cat image</h2>
-        <Dropzone onDrop={acceptedFiles => this.dropHandler(acceptedFiles)}>
-          {({ getRootProps, getInputProps }) => (
-            <section>
-              <div {...getRootProps(({ className: 'dropzone' }))}>
-                <input {...getInputProps()} />
-                <p>Drag 'n' drop a file here, or click to select a file</p>
+      <>
+        {
+          this.props.current_user && Object.keys(this.props.current_user).length !== 0 ?
+            <>
+              <div className="form-container">
+                <h2>Upload a .jpg or .png cat image</h2>
+                <Dropzone onDrop={acceptedFiles => this.dropHandler(acceptedFiles)}>
+                  {({ getRootProps, getInputProps }) => (
+                    <section>
+                      <div {...getRootProps(({ className: 'dropzone' }))}>
+                        <input {...getInputProps()} />
+                        <p>Drag 'n' drop a file here, or click to select a file</p>
+                      </div>
+                      {this.state.files.length === 0 ? null
+                        :
+                        <>
+                          {this.state.uploaded ? this.uploadedAlert() : null}
+                          <h4>Preview</h4>
+                          <aside style={this.thumbsContainer}>
+                            {this.thumbs()}
+                          </aside>
+                        </>
+                      }
+                    </section>
+                  )}
+                </Dropzone>
               </div>
-              {this.state.files.length === 0 ? null
-                :
-                <>
-                {this.state.uploaded ? this.uploadedAlert() : null}
-                <h4>Preview</h4>
-                <aside style={this.thumbsContainer}>
-                  {this.thumbs()}
-                </aside>
-                </>
-              }
-            </section>
-          )}
-        </Dropzone>
-      </div>
+            </>
+            :
+            <div style={{
+              width: "90%",
+              margin: "50px auto",
+              textAlign: "center",
+            }}>
+              <h4 style={{ textAlign: "center" }}>Please signup or login!</h4>
+            </div>
+        }
+      </>
     )
   }
 }

@@ -218,3 +218,8 @@ div.breed-details div.col {
 *::-webkit-scrollbar {
   display: none;
 }
+
+div.user-carousel .carousel-inner {
+  width: 700px;
+  margin: 0px;
+}

@@ -11,15 +11,15 @@ class Logout extends React.Component {
         this.setState({ modal: !this.state.modal })
     }
 
-    render(){
+    render() {
         return (
             <div>
                 <Button color="primary" onClick={this.toggle}>Logout</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
                     <ModalHeader toggle={this.toggle}>Are you sure you want to logout?</ModalHeader>
                     <ModalBody>
-                      <Button color="success" onClick={this.props.logoutHandler}>Yes</Button>
-                      <Button color="secondary" onClick={this.toggle}>No, I changed my mind</Button>
+                        <Button color="success" onClick={this.props.logoutHandler} style={{ marginRight: "10px" }}>Yes</Button>
+                        <Button color="secondary" onClick={this.toggle}>No, I changed my mind</Button>
                     </ModalBody>
                 </Modal>
             </div>
