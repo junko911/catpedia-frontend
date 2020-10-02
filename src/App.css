@@ -25,6 +25,12 @@ body {
   border: 1px solid gray;
 }
 
+#randomImage{
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
 .pic_container{
   overflow: hidden
 }
