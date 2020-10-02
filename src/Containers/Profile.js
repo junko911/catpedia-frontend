@@ -105,10 +105,10 @@ class Profile extends React.Component {
                   <CardText>
                     Bio: {this.props.current_user.bio}
                   </CardText>
-                  <Button onClick={this.renderFollowers}>Followers: {this.props.current_user.followers.length}</Button>
+                  <Button color = "info" onClick={this.renderFollowers}>Followers: {this.props.current_user.followers.length}</Button>
                   <br/>
                   <br/>
-                  <Button onClick={this.renderFollowing}>Following: {this.props.current_user.followeds.length}</Button>
+                  <Button color= "info" onClick={this.renderFollowing}>Following: {this.props.current_user.followeds.length}</Button>
 
                 </CardBody>
               </Col>
