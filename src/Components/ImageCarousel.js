@@ -50,16 +50,6 @@ class ImageCarousel extends React.Component {
     this.props.deleteHandler(this.props.images[this.state.activeIndex].id)
   }
 
-  // favHandler = () => {
-  //   let data = {
-  //     cat: {
-  //       api_id: this.props.images[this.state.activeIndex].api_id,
-  //       url: this.props.images[this.state.activeIndex].url
-  //     }
-  //   }
-  //   this.props.favHandler(data)
-  // }
-
   favHandler = () => {
     const id = this.props.images[this.state.activeIndex].api_id ? this.props.images[this.state.activeIndex].api_id : this.props.images[this.state.activeIndex].id
     this.props.favHandler(id)

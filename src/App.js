@@ -175,7 +175,6 @@ class App extends React.Component {
       .then(() => {
         const newFavCats = this.state.favCats.filter(e => e.api_id !== api_id)
         this.setState({ favCats: newFavCats })
-        // this.setState({ favCats: newFavCats }, () => this.toggleModal())
       })
   }
 
