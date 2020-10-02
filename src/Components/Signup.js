@@ -50,19 +50,19 @@ class Signup extends React.Component {
                             <AvField name="username" label="Username" type="text" errorMessage="Invalid username" validate={{
                                 required: { value: true, errorMessage: 'Please enter a username' },
                                 pattern: { value: '^[A-Za-z0-9]+$', errorMessage: 'Your Username must be composed only with letter and numbers' },
-                                minLength: { value: 6, errorMessage: 'Your name must be between 6 and 16 characters' },
-                                maxLength: { value: 16, errorMessage: 'Your name must be between 6 and 16 characters' }
+                                minLength: { value: 6, errorMessage: 'Your username must be between 6 and 16 characters' },
+                                maxLength: { value: 16, errorMessage: 'Your username must be between 6 and 16 characters' }
                             }} />
                             <AvField name="password" label="Password" type="password" errorMessage="Invalid password" validate={{
                                 required: { value: true, errorMessage: 'Please enter a password' },
-                                minLength: { value: 6, errorMessage: 'Your name must be between 6 and 16 characters' },
-                                maxLength: { value: 16, errorMessage: 'Your name must be between 6 and 16 characters' }
+                                minLength: { value: 6, errorMessage: 'Your password must be between 6 and 16 characters' },
+                                maxLength: { value: 16, errorMessage: 'Your password must be between 6 and 16 characters' }
                             }} />
                             <AvField name="bio" label="A bit about yourself" type="text" errorMessage="Invalid About Me" validate={{
                                 required: { value: true, errorMessage: 'Please tell us a bit about yourself' },
                                 pattern: { value: '^[a-zA-Z0-9_ ]*$', errorMessage: 'Your bio must be composed only with letter and numbers' },
-                                minLength: { value: 10, errorMessage: 'Your name must be between 10 and 120 characters' },
-                                maxLength: { value: 120, errorMessage: 'Your name must be between 10 and 120 characters' }
+                                minLength: { value: 10, errorMessage: 'Your bio must be between 10 and 120 characters' },
+                                maxLength: { value: 120, errorMessage: 'Your bio must be between 10 and 120 characters' }
                             }} />
                             <AvField name="avatar" label="Profile Pic" type="file" errorMessage="Invalid picture" validate={{
                                 required: { value: true, errorMessage: 'Please upload a picture' },

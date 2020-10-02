@@ -73,9 +73,7 @@ class UserCarousel extends React.Component {
   };
 
   render() {
-
     const { users } = this.state;
-
     const { activeIndex } = this.state;
     const slides = users.map((user, index) => {
       return (
