@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Row, Col, Modal, ModalHeader, ModalFooter, ModalBody } from 'reactstrap'
 import UserCarousel from './UserCarousel'
-import ImageCarousel from './ImageCarousel'
+import UserCardCarousel from './UserFavCarousel'
 
 class UserModal extends React.Component{
 
@@ -27,10 +27,10 @@ class UserModal extends React.Component{
               toggle={this.props.toggleModal}
             >
                 <ModalHeader>
-                <UserCarousel current_user={this.props.current_user} images={this.props.favCats} unFollowHandler={this.props.unFollowHandler} users={this.props.users}/>
+                <UserCarousel userFavsHandler={this.props.userFavsHandler} current_user={this.props.current_user} favCats={this.props.favCats} unFollowHandler={this.props.unFollowHandler} users={this.props.users} favHandler={this.props.favHandler} unFavHandler={this.props.unFavHandler}/>
                 </ModalHeader>
                 <ModalBody>
-                {/* <ImageCarousel currentIndex={0} current_user= {this.props.current_user} images ={this.props.favCats}/> */}
+                {/* <UserCardCarousel currentIndex={0} current_user= {this.props.current_user} images ={this.props.favCats}/> */}
                 </ModalBody>
             </Modal>
             </>

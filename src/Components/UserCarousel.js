@@ -1,7 +1,7 @@
 import React from 'react'
 import {Button, Row, Col, Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Alert } from 'reactstrap'
 import {Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption} from "reactstrap";
-import ImageCarousel from './ImageCarousel'
+import UserFavCarousel from './UserFavCarousel'
 
 
 
@@ -10,7 +10,17 @@ class UserCarousel extends React.Component{
     state = {
         users: [],
         activeIndex: 0,
-        animating: false
+        animating: false,
+        userFavs: [],
+        display: false
+      }
+
+      userFavsHandler = (id) => {
+        console.log(id)
+        fetch(`http://localhost:3000/api/v1/users/${id}/cats`)
+        .then(r => r.json())
+        .then(data => this.setState({userFavs: data, display: !this.state.display}))
+        
       }
 
       unFollowHandler = (user) => {
@@ -26,12 +36,13 @@ class UserCarousel extends React.Component{
         const nextIndex = activeIndex === users.length - 1 ? 0 : activeIndex + 1;
         this.setState({ activeIndex: nextIndex });
         this.props.unFollowHandler(user)
-        this.setState({activeIndex: nextIndex})
+        this.setState({activeIndex: nextIndex, display: true})
         
       }
     
       componentDidMount() {
-        this.setState({ users: this.props.users });
+        this.setState({ users: this.props.users }, ()=> this.userFavsHandler(this.state.users[0].id));
+        // this.userFavsHandler(this.state.users[0].id)
       }
     
       next = () => {
@@ -39,7 +50,7 @@ class UserCarousel extends React.Component{
         const { users } = this.state;
         if (animating) return;
         const nextIndex = activeIndex === users.length - 1 ? 0 : activeIndex + 1;
-        this.setState({ activeIndex: nextIndex });
+        this.setState({ activeIndex: nextIndex, display: true });
       };
     
       previous = () => {
@@ -47,13 +58,13 @@ class UserCarousel extends React.Component{
         const { users } = this.state;
         if (animating) return;
         const nextIndex = activeIndex === 0 ? users.length - 1 : activeIndex - 1;
-        this.setState({ activeIndex: nextIndex });
+        this.setState({ activeIndex: nextIndex, display: true });
       };
     
       goToIndex = newIndex => {
         const { animating } = this.state;
         if (animating) return;
-        this.setState({ activeIndex: newIndex });
+        this.setState({ activeIndex: newIndex, display: true });
       };
     
       setAnimating = value => {
@@ -93,6 +104,7 @@ class UserCarousel extends React.Component{
               <Row>
                 <Col>
                 {user.username}
+               
                 </Col>
               </Row>
             </Col>
@@ -101,6 +113,11 @@ class UserCarousel extends React.Component{
             <Col id="bio_box">
             This is my fake bio i want it to be decently long so that i can see how it fills up some space thanks a ton
             </Col>
+            <br/>
+          </Row>
+          <Row>
+
+            <Button style={{ display: "block", margin: "auto" }} color="info" onClick={() => this.userFavsHandler(user.id)}>Click Me for User Favs</Button>
           </Row>
     </CarouselItem>
       );
@@ -131,7 +148,11 @@ class UserCarousel extends React.Component{
             onClickHandler={this.next}
             />
         </Carousel>
-        <ImageCarousel currentIndex={0} current_user={this.props.current_user} images={this.props.images}/>
+        <div style={this.state.display ? {display: 'none'} : {display: 'inline'}}>
+          {/* <UserFavCarousel currentIndex={0} current_user={this.props.current_user} images={this.state.userFavs}/> */}
+          <UserFavCarousel images={this.state.userFavs} userFavs={this.state.userFavs} currentIndex={0} current_user={this.props.current_user} favHandler={this.props.favHandler} unFavHandler={this.props.unFavHandler} favCats={this.props.favCats}/>
+
+        </div>
         {/* {this.props.current_user && Object.keys(this.props.current_user).length !== 0 ?
           <Button
           color={this.props.button_color}

@@ -1,10 +1,11 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap'
+import { Button, Popover, PopoverBody, PopoverHeader, Modal, ModalHeader, ModalBody } from 'reactstrap'
 
 class Signup extends React.Component {
 
     state = {
+        poOpen: false,
         username: "",
         name: "",
         password: "",
@@ -15,6 +16,10 @@ class Signup extends React.Component {
 
     toggle = () => {
         this.setState({ modal: !this.state.modal })
+    }
+
+    popToggle = () => {
+        this.setState({poOpen: !this.state.poOpen})
     }
 
     changeHandler = (event) => {
@@ -50,7 +55,12 @@ class Signup extends React.Component {
                                 <input name="bio" value={this.state.bio} onChange={this.changeHandler} placeholder="A little about yourself..."></input>
                             </div>
                             <div className="modal-footer">
-                                <input type="submit" className="btn btn-success" value="Signup"/>
+                                {/* <Button type="submit" color="success" id="Popover1" value="Signup"></Button> */}
+                                <input id="Popover1" type="submit" className="btn btn-success" value="Signup"/>
+                                <Popover placement="bottom" isOpen={this.state.poOpen} target="Popover1" toggle={this.popToggle}>
+                                    <PopoverHeader>Try Again!</PopoverHeader>
+                                    <PopoverBody>This username is already taken</PopoverBody>
+                                </Popover>
                             </div>
                         </form>
                     </ModalBody>
