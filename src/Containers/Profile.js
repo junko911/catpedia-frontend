@@ -8,7 +8,6 @@ import UserModal from '../Components/UserModal'
 class Profile extends React.Component {
 
   state = {
-    catArray: [],
     isModalOpen: false,
     imagesToShow: 30,
     currentIndex: 0,
@@ -20,18 +19,18 @@ class Profile extends React.Component {
     this.setState({ isModalOpen: !this.state.isModalOpen })
   }
 
-  renderFollowers = () => { 
+  renderFollowers = () => {
     this.toggleUserModal()
-    this.setState({modalUsers: this.props.current_user.followers, userModal: !this.state.userModal})
+    this.setState({ modalUsers: this.props.current_user.followers, userModal: !this.state.userModal })
   }
 
   renderFollowing = () => {
     this.toggleUserModal()
-    this.setState({modalUsers: this.props.current_user.followeds, userModal: !this.state.userModal})
-}
+    this.setState({ modalUsers: this.props.current_user.followeds, userModal: !this.state.userModal })
+  }
 
   toggleUserModal = () => {
-      this.setState({userModal: !this.state.userModal})
+    this.setState({ userModal: !this.state.userModal })
   }
 
   showModalImage = imageId => {
@@ -39,38 +38,6 @@ class Profile extends React.Component {
     this.setState({
       currentIndex: imageId
     })
-  }
-
-  renderCats = () => {
-    console.log("hello", this.state.catArray)
-    return this.state.catArray.map((cat, index) => <CatCard showModalImage={this.showModalImage} url={cat.url} id={cat.id} slide={index} />)
-  }
-
-  deleteHandler = (id) => {
-    fetch(`http://localhost:3000/api/v1/likes/${id}`, {
-      method: "DELETE"
-    })
-      .then(res => res.json())
-      .then(() => {
-        const newCatArray = this.state.catArray.filter(e => e.id !== id)
-        this.setState({ catArray: newCatArray }, () => this.toggleModal())
-      })
-  }
-
-  componentDidMount() {
-    let token = localStorage.getItem("token")
-    fetch("http://localhost:3000/api/v1/user_favs", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "content-type": "application/json",
-        accept: "application/json"
-      }
-    })
-      .then(r => r.json())
-      .then(data => {
-        this.setState({ catArray: data })
-      })
   }
 
   getFollowings = () => {
@@ -105,6 +72,11 @@ class Profile extends React.Component {
       }
     }
     return null
+  }
+
+  unFavHandler = api_id => {
+    this.toggleModal()
+    this.props.unFavHandler(api_id)
   }
 
   render() {
@@ -157,11 +129,12 @@ class Profile extends React.Component {
         <div style={{ margin: "50px auto", width: "90%" }}>
         <div className="row" >
             <div className="col-12">
-            <FavoriteGallery favCats={this.state.catArray} deleteHandler={this.deleteHandler} isModalOpen={this.state.isModalOpen} current_user={this.props.current_user} toggleModal={this.toggleModal} />
+            <FavoriteGallery favCats={this.props.favCats} favHandler={this.props.favHandler} unFavHandler={this.unFavHandler} isModalOpen={this.state.isModalOpen} current_user={this.props.current_user} toggleModal={this.toggleModal} />
             </div>
         </div>
         </div>
         <UserModal current_user={this.props.current_user} favCats={this.state.catArray} unFollowHandler= {this.props.unFollowHandler} users={this.state.modalUsers} userModal={this.state.userModal} toggleModal={this.toggleUserModal}/>
+
             </>
             :
             <div style={{

@@ -65,6 +65,7 @@ class UserCarousel extends React.Component{
   render() {
 
     const { users } = this.state;
+
     const { activeIndex } = this.state;
     // console.log(images, activeIndex)
     const slides = users.map((user, index) => {
@@ -86,6 +87,7 @@ class UserCarousel extends React.Component{
                 {user.name}
                 </Col>
                
+
               </Row>
               <br></br>
               <Row>
@@ -146,38 +148,3 @@ class UserCarousel extends React.Component{
 }
 
 export default UserCarousel
-
-
-
-      //   <Row>
-      //     <Col>
-      //       <Card>
-      //         <Row md="6" className="no-gutters">
-      //           <Col className= "pic_container" md="8">
-    
-      //               <CardImg
-      //             // className = "profile_pic"
-      //               top
-      //               height="50%"
-      //               src="https://media.wired.com/photos/598e35994ab8482c0d6946e0/master/w_2560%2Cc_limit/phonepicutres-TA.jpg"
-      //               alt="Card image cap"
-      //             />
-      //         </Col>
-      //         <Col md="4">
-      //           <CardBody>
-      //             <CardTitle>{user.name}</CardTitle>
-      //             <CardSubtitle>{user.username}</CardSubtitle>
-      //             <CardText>
-      //               {user.bio}
-      //             </CardText>
-      //             <Alert color="primary">Followers: {user.followers.length}</Alert>
-      //             <br/>
-      //             <Alert color="primary">Following: {user.followeds.length}</Alert>
-      //             <Button color="danger" onClick={() => this.unFollowHandler(user)}>Unfollow</Button>
-
-      //           </CardBody>
-      //         </Col>
-      //         </Row>
-      //     </Card>
-      //   </Col>
-      // </Row>
