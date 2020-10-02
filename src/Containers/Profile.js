@@ -74,9 +74,9 @@ class Profile extends React.Component {
     return null
   }
 
-  buttonHandler = api_id => {
+  unFavHandler = api_id => {
     this.toggleModal()
-    this.props.buttonHandler(api_id)
+    this.props.unFavHandler(api_id)
   }
 
   render() {
@@ -129,7 +129,7 @@ class Profile extends React.Component {
               <div style={{ margin: "50px auto", width: "90%" }}>
                 <div className="row" >
                   <div className="col-12">
-                    <FavoriteGallery favCats={this.props.favCats} buttonHandler={this.buttonHandler} isModalOpen={this.state.isModalOpen} current_user={this.props.current_user} toggleModal={this.toggleModal} />
+                    <FavoriteGallery favCats={this.props.favCats} favHandler={this.props.favHandler} unFavHandler={this.unFavHandler} isModalOpen={this.state.isModalOpen} current_user={this.props.current_user} toggleModal={this.toggleModal} />
                   </div>
                 </div>
               </div>

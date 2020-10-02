@@ -59,7 +59,7 @@ export default class CatContainer extends React.Component {
           <ModalBody>
             <Row>
               <Col md="12">
-                <ImageCarousel images={this.props.cats} currentIndex={this.state.currentIndex} current_user={this.props.current_user} buttonHandler={this.props.buttonHandler} favCats={this.props.favCats}/>
+                <ImageCarousel images={this.props.cats} currentIndex={this.state.currentIndex} current_user={this.props.current_user} favHandler={this.props.favHandler} unFavHandler={this.props.unFavHandler} favCats={this.props.favCats}/>
               </Col>
             </Row>
           </ModalBody>

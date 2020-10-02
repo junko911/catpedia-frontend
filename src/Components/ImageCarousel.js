@@ -50,19 +50,24 @@ class ImageCarousel extends React.Component {
     this.props.deleteHandler(this.props.images[this.state.activeIndex].id)
   }
 
+  // favHandler = () => {
+  //   let data = {
+  //     cat: {
+  //       api_id: this.props.images[this.state.activeIndex].api_id,
+  //       url: this.props.images[this.state.activeIndex].url
+  //     }
+  //   }
+  //   this.props.favHandler(data)
+  // }
+
   favHandler = () => {
-    let data = {
-      cat: {
-        api_id: this.props.images[this.state.activeIndex].api_id,
-        url: this.props.images[this.state.activeIndex].url
-      }
-    }
-    this.props.favHandler(data)
+    const id = this.props.images[this.state.activeIndex].api_id ? this.props.images[this.state.activeIndex].api_id : this.props.images[this.state.activeIndex].id
+    this.props.favHandler(id)
   }
 
-  buttonHandler = () => {
+  unFavHandler = () => {
     const id = this.props.images[this.state.activeIndex].api_id ? this.props.images[this.state.activeIndex].api_id : this.props.images[this.state.activeIndex].id
-    this.props.buttonHandler(id)
+    this.props.unFavHandler(id)
   }
 
   render() {
@@ -112,23 +117,30 @@ class ImageCarousel extends React.Component {
           />
         </Carousel>
         {this.props.current_user && Object.keys(this.props.current_user).length !== 0 ?
-          <Button
-            color={
-              fav ?
-                "danger"
-                :
-                "success"
-            }
-            onClick={this.buttonHandler}
-            style={{ display: "block", margin: "auto" }}
-          >
+          <>
             {
               fav ?
-                "Unfavorite"
+                <>
+                  <Button
+                    color="danger"
+                    onClick={this.unFavHandler}
+                    style={{ display: "block", margin: "auto" }}
+                  >
+                    Unfavorite
+                  </Button>
+                </>
                 :
-                "Favorite"
+                <>
+                  <Button
+                    color="success"
+                    onClick={this.favHandler}
+                    style={{ display: "block", margin: "auto" }}
+                  >
+                    Favorite
+                  </Button>
+                </>
             }
-          </Button>
+          </>
           : null
         }
       </>

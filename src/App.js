@@ -201,11 +201,11 @@ class App extends React.Component {
             <Switch>
               <Route path="/signup" render={() => <Signup signupHandler={this.signupHandler} />} />
               <Route path="/login" render={() => <Login loginHandler={this.loginHandler} />} />
-              <Route path="/cats" render={() => <CatContainer current_user={this.state.user} buttonHandler={this.favHandler} cats={this.state.cats} favCats={this.state.favCats} renderCats={this.renderCats}/>} />
+              <Route path="/cats" render={() => <CatContainer current_user={this.state.user} favHandler={this.favHandler} unFavHandler={this.deleteHandler} cats={this.state.cats} favCats={this.state.favCats} renderCats={this.renderCats}/>} />
               <Route path="/breeds" component={BreedContainer} />
-              <Route path="/profile" render={() => <Profile users={this.state.users} current_user={this.state.user} followHandler={this.followHandler} unFollowHandler={this.unFollowHandler} favCats={this.state.favCats} buttonHandler={this.deleteHandler} />} />
+              <Route path="/profile" render={() => <Profile users={this.state.users} current_user={this.state.user} followHandler={this.followHandler} unFollowHandler={this.unFollowHandler} favCats={this.state.favCats} favHandler={this.favHandler} unFavHandler={this.deleteHandler} />} />
               <Route path="/upload_image" component={ImageUpload} />
-              <Route path="/" render={() => <CatContainer current_user={this.state.user} buttonHandler={this.favHandler} cats={this.state.cats} favCats={this.state.favCats} />} />
+              <Route path="/" render={() => <CatContainer current_user={this.state.user} favHandler={this.favHandler} unFavHandler={this.deleteHandler} cats={this.state.cats} favCats={this.state.favCats} />} />
             </Switch>
           </div>
         </div>
