@@ -96,6 +96,7 @@ class Profile extends React.Component {
                           src={this.props.current_user.avatar ? this.props.current_user.avatar : "https://cdn1.vectorstock.com/i/thumb-large/82/55/anonymous-user-circle-icon-vector-18958255.jpg"}
                           alt="Card image cap"
                         />
+                        <Button size="sm" style={{ margin: "10px auto", display: "block" }}>Edit</Button>
                       </Col>
                       <Col md="4">
                         <CardBody>
@@ -108,7 +109,6 @@ class Profile extends React.Component {
                           <br />
                           <br />
                           <Button color="info" onClick={this.renderFollowing}>Following: {this.props.current_user.followeds.length}</Button>
-
                         </CardBody>
                       </Col>
                       <Col md="4">

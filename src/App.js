@@ -84,18 +84,22 @@ class App extends React.Component {
       .then(data => {
         localStorage.setItem("token", data.jwt)
         this.setState({ user: data.user }, () => {
-          const token = localStorage.getItem("token")
-          const xhr = new XMLHttpRequest()
-          const fd = new FormData()
-          xhr.open("PATCH", `http://localhost:3000/api/v1/users/${data.user.id}`)
-          xhr.setRequestHeader("Authorization", `Bearer ${token}`)
-          fd.append('avatar', file)
-          xhr.send(fd)
+          this.uploadHandler(data.user.id, file)
         })
       })
       .catch(function(error){
         this.setState({poOpen: true})
       })
+  }
+
+  uploadHandler = (id, file) => {
+    const token = localStorage.getItem("token")
+    const xhr = new XMLHttpRequest()
+    const fd = new FormData()
+    xhr.open("PATCH", `http://localhost:3000/api/v1/users/${id}`)
+    xhr.setRequestHeader("Authorization", `Bearer ${token}`)
+    fd.append('avatar', file)
+    xhr.send(fd)
   }
 
   loginHandler = (userInfo) => {
