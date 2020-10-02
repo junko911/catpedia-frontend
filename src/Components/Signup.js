@@ -22,19 +22,6 @@ class Signup extends React.Component {
         this.setState({ poOpen: !this.state.poOpen })
     }
 
-
-    // submitHandler = (event) => {
-    //     let userObj = {
-    //         username: this.state.username,
-    //         name: this.state.name,
-    //         password: this.state.password,
-    //         bio: this.state.bio
-    //     }
-    //     event.preventDefault()
-    //     this.props.signupHandler(userObj, this.state.file)
-    //     this.props.history.push('/cats')
-    // }
-
     handleValidSubmit = (event, values) => {
         event.preventDefault()
         this.props.signupHandler(values, this.state.file)
@@ -91,33 +78,6 @@ class Signup extends React.Component {
             </div>
         )
     }
-
-
-    //     render() {
-    //         return (
-    //             <div>
-    //                 <Button color="success" onClick={this.toggle} style={{ marginRight: "10px" }}>Signup</Button>
-    //                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
-    //                     <ModalHeader toggle={this.toggle}>Plase Signup</ModalHeader>
-    //                     <ModalBody>
-    //                         <form onSubmit={this.submitHandler}>
-    //                             <div className="modal-body">
-    //                                 <input name="username" value={this.state.username} onChange={this.changeHandler} placeholder="Username..."></input>
-    //                                 <input name="name" value={this.state.name} onChange={this.changeHandler} placeholder="Name..."></input>
-    //                                 <input name="password" value={this.state.password} onChange={this.changeHandler} placeholder="Password..."></input>
-    //                                 <input type="file" name="avatar" value={this.state.avatar} onChange={this.uploadHandler} placeholder="Profile Picture..."></input>
-    //                                 <input name="bio" value={this.state.bio} onChange={this.changeHandler} placeholder="A little about yourself..."></input>
-    //                             </div>
-    //                             <div className="modal-footer">
-    //                                 <input type="submit" className="btn btn-success" value="Signup" />
-    //                             </div>
-    //                         </form>
-    //                     </ModalBody>
-    //                 </Modal>
-    //             </div>
-    //         )
-    //     }
-    // }
 }
 
 export default withRouter(Signup)
