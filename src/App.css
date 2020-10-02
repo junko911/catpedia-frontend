@@ -16,6 +16,10 @@ body {
   color: black;
 }
 
+.error {
+  border-color: red;
+}
+
 .header a:hover {
   color: #5c5c5c;
   text-decoration: none;
@@ -44,7 +48,7 @@ body {
 
 .profile_pic:hover{
   filter: brightness(100%);
-  transform: scale(3);
+  transform: scale(1.5);
 }
 
 div.auth {
@@ -209,4 +213,8 @@ div.breed-details div.col {
 
 .attributes span {
   margin-right: 10px;
+}
+
+*::-webkit-scrollbar {
+  display: none;
 }

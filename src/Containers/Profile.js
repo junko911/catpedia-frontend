@@ -94,7 +94,7 @@ class Profile extends React.Component {
                 className = "profile_pic"
                   top
                   width="100%"
-                  src="https://media.wired.com/photos/598e35994ab8482c0d6946e0/master/w_2560%2Cc_limit/phonepicutres-TA.jpg"
+                  src={this.props.current_user.avatar}
                   alt="Card image cap"
                 />
               </Col>
@@ -133,7 +133,7 @@ class Profile extends React.Component {
             </div>
         </div>
         </div>
-        <UserModal current_user={this.props.current_user} favCats={this.state.catArray} unFollowHandler= {this.props.unFollowHandler} users={this.state.modalUsers} userModal={this.state.userModal} toggleModal={this.toggleUserModal}/>
+        <UserModal userFavsHandler={this.props.userFavsHandler} current_user={this.props.current_user} favCats={this.props.favCats} unFollowHandler= {this.props.unFollowHandler} users={this.state.modalUsers} userModal={this.state.userModal} toggleModal={this.toggleUserModal} favHandler={this.props.favHandler} unFavHandler={this.props.unFavHandler}/>
 
             </>
             :

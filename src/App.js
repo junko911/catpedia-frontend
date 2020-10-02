@@ -13,11 +13,16 @@ import ImageUpload from './Containers/ImageUpload'
 class App extends React.Component {
 
   state = {
+    poOpen: false,
     user: {},
     users: [],
     cats: [],
     favCats: []
   }
+
+  popToggle = () => {
+    this.setState({poOpen: !this.state.poOpen})
+}
 
   componentDidMount() {
     const token = localStorage.getItem("token")
@@ -80,6 +85,9 @@ class App extends React.Component {
         localStorage.setItem("token", data.jwt)
         this.setState({ user: data.user })
       })
+      .catch(function(error){
+        this.setState({poOpen: true})
+      })
   }
 
   loginHandler = (userInfo) => {
@@ -95,6 +103,9 @@ class App extends React.Component {
       .then(data => {
         localStorage.setItem("token", data.jwt)
         this.setState({ user: data.user })
+      })
+      .catch(function(error){
+        this.setState({poOpen2: true})
       })
   }
 
@@ -143,8 +154,10 @@ class App extends React.Component {
       })
   }
 
-  favHandler = api_id => {
-    const foundCat = this.state.cats.find(cat => cat.id === api_id)
+  favHandler = (api_id, catArray= this.state.cats) => {
+    console.log(api_id, catArray)
+    const foundCat = catArray.find(cat => cat.id === api_id)
+    
     const newCat = {
       api_id: foundCat.id,
       url: foundCat.url
@@ -159,6 +172,7 @@ class App extends React.Component {
       },
       body: JSON.stringify(newCat)
     }
+    newCat
     fetch("http://localhost:3000/api/v1/cat_fav", options)
       .then(res => res.json())
       .then(cat => {
@@ -168,8 +182,12 @@ class App extends React.Component {
   }
 
   deleteHandler = api_id => {
+    let token = localStorage.getItem("token")
     fetch(`http://localhost:3000/api/v1/likes/${api_id}`, {
-      method: "DELETE"
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
     })
       .then(res => res.json())
       .then(() => {
@@ -181,9 +199,9 @@ class App extends React.Component {
   render() {
     let auth_link
     if (!this.state.user || Object.keys(this.state.user).length === 0) {
-      auth_link = <><Signup signupHandler={this.signupHandler} /><Login loginHandler={this.loginHandler} /></>
+      auth_link = <><Signup popToggle ={this.popToggle} poOpen={this.state.poOpen} signupHandler={this.signupHandler} /><Login popToggle ={this.popToggle} poOpen={this.state.poOpen} loginHandler={this.loginHandler} /></>
     } else {
-      auth_link = <Logout logoutHandler={this.logoutHandler} />
+      auth_link = <Logout poOpen2={this.state.poOpen2} logoutHandler={this.logoutHandler} />
     }
 
     return (
@@ -198,11 +216,11 @@ class App extends React.Component {
           <div className="gallery">
             <NavBar />
             <Switch>
-              <Route path="/signup" render={() => <Signup signupHandler={this.signupHandler} />} />
-              <Route path="/login" render={() => <Login loginHandler={this.loginHandler} />} />
+              <Route path="/signup" render={() => <Signup poOpen={this.state.poOpen} signupHandler={this.signupHandler} />} />
+              <Route path="/login" render={() => <Login poOpen2={this.state.poOpen2} loginHandler={this.loginHandler} />} />
               <Route path="/cats" render={() => <CatContainer current_user={this.state.user} favHandler={this.favHandler} unFavHandler={this.deleteHandler} cats={this.state.cats} favCats={this.state.favCats} renderCats={this.renderCats}/>} />
               <Route path="/breeds" component={BreedContainer} />
-              <Route path="/profile" render={() => <Profile users={this.state.users} current_user={this.state.user} followHandler={this.followHandler} unFollowHandler={this.unFollowHandler} favCats={this.state.favCats} favHandler={this.favHandler} unFavHandler={this.deleteHandler} />} />
+              <Route path="/profile" render={() => <Profile userFavsHandler= {this.userFavsHandler} favHandler={this.favHandler} unFavHandler={this.deleteHandler} favCats={this.state.favCats} users={this.state.users} current_user={this.state.user} followHandler={this.followHandler} unFollowHandler={this.unFollowHandler} favCats={this.state.favCats} favHandler={this.favHandler} unFavHandler={this.deleteHandler} />} />
               <Route path="/upload_image" component={ImageUpload} />
               <Route path="/" render={() => <CatContainer current_user={this.state.user} favHandler={this.favHandler} unFavHandler={this.deleteHandler} cats={this.state.cats} favCats={this.state.favCats} />} />
             </Switch>
