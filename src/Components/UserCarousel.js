@@ -1,6 +1,6 @@
 import React from 'react'
-import {Button, Row, Col, Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Alert } from 'reactstrap'
-import {Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption} from "reactstrap";
+import {Button, Row, Col } from 'reactstrap'
+import {Carousel, CarouselItem, CarouselControl, CarouselIndicators, } from "reactstrap";
 import UserFavCarousel from './UserFavCarousel'
 
 
