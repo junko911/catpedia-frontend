@@ -36,7 +36,7 @@ class Signup extends React.Component {
 
         return (
             <div>
-                <Button color="success" onClick={this.toggle}>Signup</Button>
+                <Button color="success" onClick={this.toggle} style={{ marginRight: "10px" }} > Signup</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
                     <ModalHeader toggle={this.toggle}>Please Signup</ModalHeader>
                     <ModalBody>
