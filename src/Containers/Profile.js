@@ -96,19 +96,19 @@ class Profile extends React.Component {
                           src={this.props.current_user.avatar ? this.props.current_user.avatar : "https://cdn1.vectorstock.com/i/thumb-large/82/55/anonymous-user-circle-icon-vector-18958255.jpg"}
                           alt="Card image cap"
                         />
-                        <Button size="sm" style={{ margin: "10px auto", display: "block" }}>Edit</Button>
+                        {/* <Button size="sm" style={{ margin: "10px auto", display: "block" }}>Edit</Button> */}
                       </Col>
                       <Col md="4">
                         <CardBody>
                           <CardTitle>{this.props.current_user.name}</CardTitle>
                           <CardSubtitle>@{this.props.current_user.username}</CardSubtitle>
-                          <CardText>
+                          <CardText style={{margin:"20px auto"}}>
                             Bio: {this.props.current_user.bio}
                           </CardText>
-                          <Button color="info" onClick={this.renderFollowers}>Followers: {this.props.current_user.followers.length}</Button>
+                          <Button color="info" onClick={this.renderFollowers}>Followings: {this.props.current_user.followers.length}</Button>
                           <br />
                           <br />
-                          <Button color="info" onClick={this.renderFollowing}>Following: {this.props.current_user.followeds.length}</Button>
+                          <Button color="info" onClick={this.renderFollowing}>Followers: {this.props.current_user.followeds.length}</Button>
                         </CardBody>
                       </Col>
                       <Col md="4">
