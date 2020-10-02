@@ -172,7 +172,6 @@ class App extends React.Component {
       },
       body: JSON.stringify(newCat)
     }
-    newCat
     fetch("http://localhost:3000/api/v1/cat_fav", options)
       .then(res => res.json())
       .then(cat => {
@@ -220,7 +219,7 @@ class App extends React.Component {
               <Route path="/login" render={() => <Login poOpen2={this.state.poOpen2} loginHandler={this.loginHandler} />} />
               <Route path="/cats" render={() => <CatContainer current_user={this.state.user} favHandler={this.favHandler} unFavHandler={this.deleteHandler} cats={this.state.cats} favCats={this.state.favCats} renderCats={this.renderCats}/>} />
               <Route path="/breeds" component={BreedContainer} />
-              <Route path="/profile" render={() => <Profile userFavsHandler= {this.userFavsHandler} favHandler={this.favHandler} unFavHandler={this.deleteHandler} favCats={this.state.favCats} users={this.state.users} current_user={this.state.user} followHandler={this.followHandler} unFollowHandler={this.unFollowHandler} favCats={this.state.favCats} favHandler={this.favHandler} unFavHandler={this.deleteHandler} />} />
+              <Route path="/profile" render={() => <Profile userFavsHandler= {this.userFavsHandler} favHandler={this.favHandler} unFavHandler={this.deleteHandler} favCats={this.state.favCats} users={this.state.users} current_user={this.state.user} followHandler={this.followHandler} unFollowHandler={this.unFollowHandler} />} />
               <Route path="/upload_image" component={ImageUpload} />
               <Route path="/" render={() => <CatContainer current_user={this.state.user} favHandler={this.favHandler} unFavHandler={this.deleteHandler} cats={this.state.cats} favCats={this.state.favCats} />} />
             </Switch>
