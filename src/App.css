@@ -219,6 +219,7 @@ div.breed-details div.col {
   display: none;
 }
 
-.modal .carousel-inner {
+div.user-carousel .carousel-inner {
   width: 700px;
+  margin: 0px;
 }

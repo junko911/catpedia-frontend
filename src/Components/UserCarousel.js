@@ -87,7 +87,7 @@ class UserCarousel extends React.Component {
           <Row>
             <Col md="8">
               <div>
-              <img alt="" style={{display: "block", maxWidth: "100%", margin: "auto", height: "300px"}} id="randomImage" className="img-fluid" src={user.avatar ? user.avatar : "https://cdn1.vectorstock.com/i/thumb-large/82/55/anonymous-user-circle-icon-vector-18958255.jpg"} />
+                <img alt="" style={{ display: "block", maxWidth: "100%", margin: "auto", height: "300px" }} id="randomImage" className="img-fluid" src={user.avatar ? user.avatar : "https://cdn1.vectorstock.com/i/thumb-large/82/55/anonymous-user-circle-icon-vector-18958255.jpg"} />
               </div>
             </Col>
             <Col md="4">
@@ -102,7 +102,6 @@ class UserCarousel extends React.Component {
               <Row>
                 <Col>
                   @{user.username}
-                  <Button style={{ display: "block", margin: "auto" }} color="info" onClick={() => this.userFavsHandler(user.id)}>Click Me for User Favs</Button>
                 </Col>
               </Row>
             </Col>
@@ -114,7 +113,7 @@ class UserCarousel extends React.Component {
             <br />
           </Row>
           <Row>
-
+            <Button style={{ display: "block", margin: "20px auto" }} color="info" onClick={() => this.userFavsHandler(user.id)}>Click Me for User Favs</Button>
           </Row>
         </CarouselItem>
       );
@@ -127,19 +126,20 @@ class UserCarousel extends React.Component {
           activeIndex={activeIndex}
           next={this.next}
           previous={this.previous}
+          className="user-carousel"
         >
           <CarouselIndicators
             items={users}
             activeIndex={activeIndex}
             onClickHandler={this.goToIndex}
-            
+
           />
           {slides}
           <CarouselControl
             direction="prev"
             directionText="Previous"
             onClickHandler={this.previous}
-            style={{position: "fixed"}}
+            style={{ position: "fixed" }}
           />
           <CarouselControl
             direction="next"
