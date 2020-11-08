@@ -44,13 +44,13 @@ class Signup extends React.Component {
                             <AvField name="name" label="Name" type="text" errorMessage="Invalid name" validate={{
                                 required: { value: true, errorMessage: 'Please enter a name' },
                                 pattern: { value: '^[a-zA-Z0-9_ ]*$', errorMessage: 'Your name must be composed only with letter and numbers' },
-                                minLength: { value: 6, errorMessage: 'Your name must be between 6 and 16 characters' },
+                                minLength: { value: 2, errorMessage: 'Your name must be between 6 and 16 characters' },
                                 maxLength: { value: 16, errorMessage: 'Your name must be between 6 and 16 characters' }
                             }} />
                             <AvField name="username" label="Username" type="text" errorMessage="Invalid username" validate={{
                                 required: { value: true, errorMessage: 'Please enter a username' },
                                 pattern: { value: '^[A-Za-z0-9]+$', errorMessage: 'Your Username must be composed only with letter and numbers' },
-                                minLength: { value: 6, errorMessage: 'Your username must be between 6 and 16 characters' },
+                                minLength: { value: 2, errorMessage: 'Your username must be between 6 and 16 characters' },
                                 maxLength: { value: 16, errorMessage: 'Your username must be between 6 and 16 characters' }
                             }} />
                             <AvField name="password" label="Password" type="password" errorMessage="Invalid password" validate={{
