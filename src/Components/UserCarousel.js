@@ -17,7 +17,7 @@ class UserCarousel extends React.Component {
 
   userFavsHandler = (id) => {
     console.log(id)
-    fetch(`http://localhost:3000/api/v1/users/${id}/cats`)
+    fetch(`https://catpedia-api.herokuapp.com/api/v1/users/${id}/cats`)
       .then(r => r.json())
       .then(data => this.setState({ userFavs: data, display: !this.state.display }))
 

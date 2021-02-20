@@ -24,7 +24,7 @@ class ImageUpload extends React.Component {
       })
 
       // Initiate a multipart/form-data upload
-      xhr.open("POST", "http://localhost:3000/api/v1/cats")
+      xhr.open("POST", "https://catpedia-api.herokuapp.com/api/v1/cats")
       xhr.setRequestHeader("Authorization", `Bearer ${token}`)
       fd.append('file', file)
       xhr.send(fd)

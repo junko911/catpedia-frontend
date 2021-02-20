@@ -27,19 +27,19 @@ class App extends React.Component {
   componentDidMount() {
     const token = localStorage.getItem("token")
     if (token) {
-      fetch("http://localhost:3000/api/v1/profile", {
+      fetch("https://catpedia-api.herokuapp.com/api/v1/profile", {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` }
       })
         .then(resp => resp.json())
         .then(data => this.setState({ user: data.user }))
-      fetch("http://localhost:3000/api/v1/users", {
+      fetch("https://catpedia-api.herokuapp.com/api/v1/users", {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` }
       })
         .then(res => res.json())
         .then(users => this.setState({ users: users }))
-      fetch("http://localhost:3000/api/v1/user_favs", {
+      fetch("https://catpedia-api.herokuapp.com/api/v1/user_favs", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -56,7 +56,7 @@ class App extends React.Component {
   }
 
   renderCats = () => {
-    fetch("http://localhost:3000/api/v1/cats", {
+    fetch("https://catpedia-api.herokuapp.com/api/v1/cats", {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -72,7 +72,7 @@ class App extends React.Component {
   }
 
   signupHandler = (userObj, file) => {
-    fetch("http://localhost:3000/api/v1/users", {
+    fetch("https://catpedia-api.herokuapp.com/api/v1/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -96,14 +96,14 @@ class App extends React.Component {
     const token = localStorage.getItem("token")
     const xhr = new XMLHttpRequest()
     const fd = new FormData()
-    xhr.open("PATCH", `http://localhost:3000/api/v1/users/${id}`)
+    xhr.open("PATCH", `https://catpedia-api.herokuapp.com/api/v1/users/${id}`)
     xhr.setRequestHeader("Authorization", `Bearer ${token}`)
     fd.append('avatar', file)
     xhr.send(fd)
   }
 
   loginHandler = (userInfo) => {
-    fetch("http://localhost:3000/api/v1/login", {
+    fetch("https://catpedia-api.herokuapp.com/api/v1/login", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -139,7 +139,7 @@ class App extends React.Component {
         id: user.id
       })
     }
-    fetch(`http://localhost:3000/api/v1/users/${user.id}/follow`, options)
+    fetch(`https://catpedia-api.herokuapp.com/api/v1/users/${user.id}/follow`, options)
       .then(res => res.json())
       .then(() => {
         const newFollowers = [...this.state.user.followers, user]
@@ -151,7 +151,7 @@ class App extends React.Component {
 
   unFollowHandler = user => {
     const token = localStorage.getItem("token")
-    fetch(`http://localhost:3000/api/v1/users/${user.id}/unfollow`, {
+    fetch(`https://catpedia-api.herokuapp.com/api/v1/users/${user.id}/unfollow`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`
@@ -184,7 +184,7 @@ class App extends React.Component {
       },
       body: JSON.stringify(newCat)
     }
-    fetch("http://localhost:3000/api/v1/cat_fav", options)
+    fetch("https://catpedia-api.herokuapp.com/api/v1/cat_fav", options)
       .then(res => res.json())
       .then(cat => {
         const newFavCats = [...this.state.favCats, cat]
@@ -194,7 +194,7 @@ class App extends React.Component {
 
   deleteHandler = api_id => {
     let token = localStorage.getItem("token")
-    fetch(`http://localhost:3000/api/v1/likes/${api_id}`, {
+    fetch(`https://catpedia-api.herokuapp.com/api/v1/likes/${api_id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,

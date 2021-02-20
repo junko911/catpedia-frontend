@@ -12,7 +12,7 @@ class BreedContainer extends React.Component {
 
   getCats() {
     let token = localStorage.getItem("token")
-    fetch(`http://localhost:3000/api/v1/cats?breed_id=${this.state.selectedBreed.id}`, {
+    fetch(`https://catpedia-api.herokuapp.com/api/v1/cats?breed_id=${this.state.selectedBreed.id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -26,7 +26,7 @@ class BreedContainer extends React.Component {
 
   componentDidMount() {
     let token = localStorage.getItem("token")
-    fetch("http://localhost:3000/api/v1/breeds", {
+    fetch("https://catpedia-api.herokuapp.com/api/v1/breeds", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
