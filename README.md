@@ -4,6 +4,8 @@
 ## About
 Cat Encyclopedia where users can find and upload cat images, and get information about cat breeds.
 
+[Link](https://catpedia-app.herokuapp.com/)
+
 Key features:
 
 * create an account and follow other users.
